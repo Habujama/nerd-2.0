@@ -2,6 +2,7 @@ import { type JSX } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/use-context';
+import logo from '../../assets/react.svg';
 import './welcome-page.css';
 
 type FormValues = {
@@ -68,51 +69,60 @@ export default function LoginPage(): JSX.Element {
   };
 
   return (
-    <div className='login-page'>
+    <div>
+      <img src={logo} className='logo' alt='N.E.R.D 2.0 logo' />
       <form className='login-form' onSubmit={handleSubmit(onSubmit)}>
-        <h2>Přihlášení</h2>
+        <div className='title'>
+          <h2>N.E.R.D 2.0</h2>
+        </div>
 
-        <label>
-          Uživatelské jméno
-          <input
-            {...register('username', {
-              required: 'Uživatelské jméno je povinné',
-            })}
-            aria-invalid={!!errors.username}
-            aria-describedby='username-error'
-            autoComplete='username'
-          />
-        </label>
-        {errors.username && (
-          <p id='username-error' role='alert' className='error'>
-            {errors.username.message}
-          </p>
-        )}
+        <div>
+          <label>
+            Uživatelské jméno
+            <input
+              {...register('username', {
+                required: 'Uživatelské jméno je povinné',
+              })}
+              aria-invalid={!!errors.username}
+              aria-describedby='username-error'
+              autoComplete='username'
+              className={!errors.username ? 'input-clear' : ''}
+            />
+            {errors.username && (
+              <span id='username-error' role='alert' className='error'>
+                {errors.username.message}
+              </span>
+            )}
+          </label>
+        </div>
 
-        <label>
-          Heslo
-          <input
-            type='password'
-            {...register('password', { required: 'Heslo je povinné' })}
-            aria-invalid={!!errors.password}
-            aria-describedby='password-error'
-            autoComplete='current-password'
-          />
-        </label>
-        {errors.password && (
-          <p id='password-error' role='alert' className='error'>
-            {errors.password.message}
-          </p>
-        )}
+        <span>
+          <label>
+            Heslo
+            <input
+              type='password'
+              {...register('password', { required: 'Heslo je povinné' })}
+              aria-invalid={!!errors.password}
+              aria-describedby='password-error'
+              autoComplete='current-password'
+              className={!errors.username ? 'input-clear' : ''}
+            />
+            {errors.password && (
+              <span id='password-error' role='alert' className='error'>
+                {errors.password.message}
+              </span>
+            )}
+          </label>
+        </span>
 
         <button type='submit' disabled={isSubmitting}>
           Přihlásit se
         </button>
 
         <p className='hint'>
-          Testovací uživatel: <strong>hacker | medic | military</strong>
+          Uživatel: <strong>hacker | medic | military</strong>
           <br />
-          Testovací heslo: <strong>letmein123</strong>
+          Heslo: <strong>letmein123</strong>
         </p>
       </form>
     </div>
