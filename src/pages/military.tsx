@@ -1,9 +1,14 @@
-const MilitaryPage = () => {
-    return (
-        <div>
-            This space is reserved for military only.
-        </div>
-    )
-}
+import Nav from '../components/nav';
+import Wrapper from '../components/wrapper';
 
-export default MilitaryPage
+const MilitaryPage = () => {
+  return (
+    <Wrapper>
+      <Nav />
+      <h1>Military panel</h1>
+      This space is reserved for military only.
+    </Wrapper>
+  );
+};
+
+export default MilitaryPage;

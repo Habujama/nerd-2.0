@@ -1,0 +1,21 @@
+.nav {
+    position: fixed;
+    top: 2rem;
+    left:2rem;
+    height: 5rem;
+}
+
+.nav button {
+    width: 150px;
+    border: none;
+    color: #66FFB2;
+    font-size: large;
+}
+
+.nav button:hover,
+.nav button:active {
+    background: #66FFB2;
+    border: 1px solid #00CC66;
+    color: #1E2A26;
+    white-space: nowrap;
+}
