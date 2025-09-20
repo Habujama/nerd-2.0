@@ -8,7 +8,7 @@ import MedicValues from '../../components/medic-values.js';
 const MedicPage = () => {
   const [isReading, setIsReading] = useState(false);
   return (
-    <Wrapper alignStart={isReading ? true : false}>
+    <Wrapper>
       <Nav />
       <div className='medic-panel'>
         <button

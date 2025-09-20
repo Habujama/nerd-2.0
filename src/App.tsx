@@ -3,7 +3,7 @@ import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import './App.css';
 import Hacker from './pages/hacker';
 import Medic from './pages/medic/medic';
-import Military from './pages/military';
+import Military from './pages/military/military';
 import WelcomePage from './pages/welcome/welcome-page';
 import { AuthProvider } from './context/context';
 import { useAuth } from './context/use-context';

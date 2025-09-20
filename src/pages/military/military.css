@@ -1,0 +1,8 @@
+.military-page {
+  width: 80%;
+  margin-top: 8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+  align-items: center;
+}
