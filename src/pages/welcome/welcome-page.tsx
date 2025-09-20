@@ -81,13 +81,14 @@ export default function LoginPage(): JSX.Element {
             aria-invalid={!!errors.username}
             aria-describedby='username-error'
             autoComplete='username'
+            className={!errors.username ? 'input-clear' : ''}
           />
+          {errors.username && (
+            <span id='username-error' role='alert' className='error'>
+              {errors.username.message}
+            </span>
+          )}
         </label>
-        {errors.username && (
-          <p id='username-error' role='alert' className='error'>
-            {errors.username.message}
-          </p>
-        )}
 
         <label>
           Heslo
@@ -97,22 +98,23 @@ export default function LoginPage(): JSX.Element {
             aria-invalid={!!errors.password}
             aria-describedby='password-error'
             autoComplete='current-password'
+            className={!errors.password ? 'input-clear' : ''}
           />
+          {errors.password && (
+            <span id='password-error' role='alert' className='error'>
+              {errors.password.message}
+            </span>
+          )}
         </label>
-        {errors.password && (
-          <p id='password-error' role='alert' className='error'>
-            {errors.password.message}
-          </p>
-        )}
 
         <button type='submit' disabled={isSubmitting}>
           Přihlásit se
         </button>
 
         <p className='hint'>
-          Testovací uživatel: <strong>hacker | medic | military</strong>
+          Uživatel: <strong>hacker | medic | military</strong>
           <br />
-          Testovací heslo: <strong>letmein123</strong>
+          Heslo: <strong>letmein123</strong>
         </p>
       </form>
     </div>
