@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import LoadingEden from '../../components/loading-eden/loading-eden.jsx';
-import CircleExplosion from '../../components/loading-eden/circle-explosion.jsx';
+import CrossExplosion from '../../components/loading-eden/cross-explosion.jsx';
 import Nav from '../../components/nav';
 import Wrapper from '../../components/wrapper';
 import './military.css';
@@ -72,7 +72,7 @@ const MilitaryPage = () => {
         {isLoading && !loadingComplete && (
           <LoadingEden setLoadingComplete={setLoadingComplete} />
         )}
-        <CircleExplosion trigger={loadingComplete} />
+        <CrossExplosion trigger={loadingComplete} />
       </div>
     </Wrapper>
   );

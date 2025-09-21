@@ -4,7 +4,7 @@ import './loading-eden.css';
 
 const LoadingEden = ({ setLoadingComplete}) => {
   const svgRef = useRef(null);
-  const duration = 3;
+  const duration = 50;
 
   useEffect(() => {
     const svg = svgRef.current;

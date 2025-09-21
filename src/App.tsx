@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import './App.css';
-import Hacker from './pages/hacker';
+import Hacker from './pages/hacker/hacker';
 import Medic from './pages/medic/medic';
 import Military from './pages/military/military';
 import WelcomePage from './pages/welcome/welcome-page';
