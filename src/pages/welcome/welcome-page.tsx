@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/use-context';
 import './welcome-page.css';
 import Wrapper from '../../components/wrapper';
+import RevelationLoop from '../../components/revelations/revelations';
 
 type FormValues = {
   username: string;
@@ -71,7 +72,7 @@ export default function LoginPage(): JSX.Element {
   return (
     <Wrapper alignStart={false}>
       <form className='login-form' onSubmit={handleSubmit(onSubmit)}>
-        <h2>Přihlášení</h2>
+        <h2>N. E. R. D. 2.0</h2>
 
         <label>
           Uživatelské jméno
@@ -118,6 +119,7 @@ export default function LoginPage(): JSX.Element {
           Heslo: <strong>letmein123</strong>
         </p>
       </form>
+      <RevelationLoop />
     </Wrapper>
   );
 }

@@ -13,6 +13,7 @@ const MilitaryPage = () => {
     <Wrapper>
       <Nav />
       <div className='military-page'>
+        {loadingComplete && <h2>Nahrávání dokončeno!</h2>}
         {!loadingComplete && (
           <>
             <p>
