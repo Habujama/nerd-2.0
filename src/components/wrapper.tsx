@@ -1,4 +1,5 @@
-import './wrapper.css'
+import NoiseLines from './noise';
+import './wrapper.css';
 
 const Wrapper = ({
   children,
@@ -8,7 +9,8 @@ const Wrapper = ({
   alignStart?: boolean;
 }) => {
   return (
-    <div className='noise'>
+    <div className='wrapper-container'>
+      <NoiseLines />
       <div
         className='wrapper'
         style={{ justifyContent: alignStart ? 'flex-start' : 'center' }}

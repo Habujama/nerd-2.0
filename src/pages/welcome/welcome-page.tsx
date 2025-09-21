@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/use-context';
 import './welcome-page.css';
 import Wrapper from '../../components/wrapper';
-import RevelationLoop from '../../components/revelations/revelations';
+import EuLogo from '../../components/eu-logo';
 
 type FormValues = {
   username: string;
@@ -72,8 +72,7 @@ export default function LoginPage(): JSX.Element {
   return (
     <Wrapper alignStart={false}>
       <form className='login-form' onSubmit={handleSubmit(onSubmit)}>
-        <h2>N. E. R. D. 2.0</h2>
-
+        <h2 style={{ color: '#66FFB2' }}>N. E. R. D. 2.0</h2>
         <label>
           Uživatelské jméno
           <input
@@ -119,7 +118,9 @@ export default function LoginPage(): JSX.Element {
           Heslo: <strong>letmein123</strong>
         </p>
       </form>
-      <RevelationLoop />
+      <div className='eu-logo'>
+        <EuLogo radius={280} starOuter={270} />
+      </div>
     </Wrapper>
   );
 }
