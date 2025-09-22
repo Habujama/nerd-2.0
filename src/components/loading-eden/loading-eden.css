@@ -1,0 +1,10 @@
+.loading-eden {
+  width: 100%;
+  height: 60px;
+}
+
+.fuse {
+  stroke: #66FFB2;
+  stroke-width: 20px;
+  fill: transparent;
+}

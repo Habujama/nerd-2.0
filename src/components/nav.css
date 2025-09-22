@@ -1,0 +1,24 @@
+.nav {
+    position: fixed;
+    top: 1rem;
+    display: flex;
+    width: 100vw;
+    height: 5rem;
+    margin: -1rem 0 2rem 5rem;
+}
+
+.nav button {
+    width: 150px;
+    border: none;
+    color: #66FFB2;
+    font-size: large;
+    margin-top: 2rem;
+}
+
+.nav button:hover,
+.nav button:active {
+    background: #66FFB2;
+    border: 1px solid #00CC66;
+    color: #1E2A26;
+    white-space: nowrap;
+}

@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/use-context';
 import './welcome-page.css';
+import Wrapper from '../../components/wrapper';
+import EuLogo from '../../components/eu-logo';
 
 type FormValues = {
   username: string;
@@ -68,10 +70,9 @@ export default function LoginPage(): JSX.Element {
   };
 
   return (
-    <div className='login-page'>
+    <Wrapper alignStart={false}>
       <form className='login-form' onSubmit={handleSubmit(onSubmit)}>
-        <h2>Přihlášení</h2>
-
+        <h2 style={{ color: '#66FFB2' }}>N. E. R. D. 2.0</h2>
         <label>
           Uživatelské jméno
           <input
@@ -81,13 +82,14 @@ export default function LoginPage(): JSX.Element {
             aria-invalid={!!errors.username}
             aria-describedby='username-error'
             autoComplete='username'
+            className={!errors.username ? 'input-clear' : ''}
           />
+          {errors.username && (
+            <span id='username-error' role='alert' className='error'>
+              {errors.username.message}
+            </span>
+          )}
         </label>
-        {errors.username && (
-          <p id='username-error' role='alert' className='error'>
-            {errors.username.message}
-          </p>
-        )}
 
         <label>
           Heslo
@@ -97,24 +99,28 @@ export default function LoginPage(): JSX.Element {
             aria-invalid={!!errors.password}
             aria-describedby='password-error'
             autoComplete='current-password'
+            className={!errors.password ? 'input-clear' : ''}
           />
+          {errors.password && (
+            <span id='password-error' role='alert' className='error'>
+              {errors.password.message}
+            </span>
+          )}
         </label>
-        {errors.password && (
-          <p id='password-error' role='alert' className='error'>
-            {errors.password.message}
-          </p>
-        )}
 
         <button type='submit' disabled={isSubmitting}>
           Přihlásit se
         </button>
 
         <p className='hint'>
-          Testovací uživatel: <strong>hacker | medic | military</strong>
+          Uživatel: <strong>hacker | medic | military</strong>
           <br />
-          Testovací heslo: <strong>letmein123</strong>
+          Heslo: <strong>letmein123</strong>
         </p>
       </form>
-    </div>
+      <div className='eu-logo'>
+        <EuLogo radius={280} starOuter={270} />
+      </div>
+    </Wrapper>
   );
 }

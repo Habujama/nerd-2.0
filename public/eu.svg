@@ -1,0 +1,28 @@
+<svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox={`0 0 ${width} ${height}`}
+      width={width}
+      height={height}
+      role="img"
+          aria-label="Flag of the European Union"
+          ref={groupRef}
+    >
+      <defs>
+        <g id="star" fill="#fff">
+          <polygon
+            points="
+              0,-30
+              6.735,-9.271
+              28.532,-9.271
+              10.898,3.541
+              17.634,24.271
+              0,11.459
+              -17.634,24.271
+              -10.898,3.541
+              -28.532,-9.271
+              -6.735,-9.271"
+          />
+        </g>
+      </defs>
+      <g>{stars}</g>
+    </svg>

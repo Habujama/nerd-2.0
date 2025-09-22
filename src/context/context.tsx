@@ -3,7 +3,7 @@ import type { CipherInfo, Role } from './types';
 import { AuthContext } from "./types";
 
 const STORAGE_KEY = "postapok_auth_v1";
-const DEFAULT_CIPHER_COUNT = 10;
+const DEFAULT_CIPHER_COUNT = 9;
 
 function makeInitialCiphers(count = DEFAULT_CIPHER_COUNT): CipherInfo[] {
   return Array.from({ length: count }).map((_, idx) => ({
@@ -45,9 +45,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const payload = { role, solvedCiphers };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
     } catch (err) {
-        console.error(err)
-      // ignore storage errors silently (or log)
-      // console.warn("storage error", err);
+      console.error(err);
     }
   }, [role, solvedCiphers]);
 
@@ -60,7 +58,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const markCipherSolved = (id: number, label?: string) => {
-    if (role !== "hacker") return;
+    if (role !== 'hacker') return;
     setSolvedCiphers((prev) => {
       const idx = prev.findIndex((c) => c.id === id);
       if (idx === -1) {
@@ -80,7 +78,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const markCipherUnsolved = (id: number) => {
-    if (role !== "hacker") return;
+    if (role !== 'hacker') return;
     setSolvedCiphers((prev) => {
       const idx = prev.findIndex((c) => c.id === id);
       if (idx === -1) return prev;
@@ -90,10 +88,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-/*   const isCipherSolved = (id: number) => {
+  const isCipherSolved = (id: number) => {
     const c = solvedCiphers.find((x) => x.id === id);
     return !!c && c.solved;
-  }; */
+  };
 
   const getSolvedCount = () => solvedCiphers.filter((c) => c.solved).length;
 
@@ -109,10 +107,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       solvedCiphers,
       markCipherSolved,
       markCipherUnsolved,
+      isCipherSolved,
       getSolvedCount,
       resetAllCiphers,
     }),
-    [role, solvedCiphers]
+    [role, solvedCiphers],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

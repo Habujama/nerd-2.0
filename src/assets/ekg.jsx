@@ -1,5 +1,4 @@
-// src/components/EkgRealisticMulti.js
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export default function EkgRealisticMulti({
   duration = 4000, // delší trvání pro víc cyklů
@@ -119,7 +118,7 @@ export default function EkgRealisticMulti({
       <path
         ref={pathRef}
         d={pathData}
-        stroke="black"
+        stroke="#66FFB2"
         strokeWidth="2"
         fill="none"
       />
