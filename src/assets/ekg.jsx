@@ -41,11 +41,11 @@ export default function EkgRealisticMulti({
     const w = totalWidth;
 
     // Náhodné amplitudy
-    const pAmp = mid - 10 - Math.random() * 5;
-    const qAmp = mid + 20 + Math.random() * 5;
-    const rAmp = mid - 40 - Math.random() * 10;
-    const sAmp = mid + 30 + Math.random() * 5;
-    const tAmp = mid - 15 - Math.random() * 5;
+    const pAmp = mid - 10
+    const qAmp = mid
+    const rAmp = mid - 40
+    const sAmp = mid + 20
+    const tAmp = mid - 15
 
     return [
       [offsetX + w * 0.0, mid],
@@ -54,10 +54,12 @@ export default function EkgRealisticMulti({
       [offsetX + w * 0.25, qAmp], // Q
       [offsetX + w * 0.3, rAmp],  // R
       [offsetX + w * 0.35, sAmp], // S
-      [offsetX + w * 0.45, mid],
+      [offsetX + w * 0.40, mid],
+      [offsetX + w * 0.50, mid],
       [offsetX + w * 0.6, tAmp],  // T
       [offsetX + w * 0.75, mid],
-      [offsetX + w * 1.0, mid],   // návrat
+      [offsetX + w * 0.75, mid],
+      [offsetX + w * 1.0, mid],
     ];
   }, [height])
 
