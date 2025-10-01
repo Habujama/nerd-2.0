@@ -20,12 +20,6 @@
   margin-bottom: 1rem;
 }
 
-.hint {
-  font-size: 0.75rem;
-  color: #CCCCCC;
-  text-align: center;
-}
-
 .eu-logo {
   position: absolute;
   transform: translateY(15px);

@@ -13,7 +13,7 @@ export type CipherInfo = {
 
 export type AuthContextType = {
   role: Role;
-  login: (newRole: Role) => void;
+  login: (newRole: Role, username: string | null) => void;
   logout: () => void;
 
   // cipher API (pro Hackera)
@@ -25,3 +25,40 @@ export type AuthContextType = {
   // utility
   resetAllCiphers: () => void;
 };
+
+export const HACKER = [
+  {
+    username: 'hex',
+    password: '#0xE7RA',
+  },
+  {
+    username: 'anathema',
+    password: 'echoesOfTalia',
+  },
+  {
+    username: 'luckee_333',
+    password: 'manAdealer77!',
+  },
+];
+
+export const MEDIC = [
+  {
+    username: 'bernardo',
+    password: 'psalm_23',
+  },
+  {
+    username: 'ricardo',
+    password: 'bez_slitovani',
+  },
+  {
+    username: 'michelle',
+    password: 'ezra_vstal',
+  },
+];
+
+export const MILITARY = [
+  {
+    username: 'military',
+    password: 'letmein123',
+  },
+];

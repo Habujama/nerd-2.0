@@ -14,59 +14,66 @@ function makeInitialCiphers(count = DEFAULT_CIPHER_COUNT): CipherInfo[] {
   }));
 }
 
+type StoredAuth = {
+  role: Role | null;
+  username: string | null;
+  solvedCiphers: CipherInfo[];
+};
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  // load stored state (role + ciphers) from localStorage
-  const [role, setRole] = useState<Role>(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return null;
-      const parsed = JSON.parse(raw);
-      return parsed?.role ?? null;
-    } catch {
-      return null;
-    }
-  });
+  const [role, setRole] = useState<Role | null>(null);
+  const [username, setUsername] = useState<string | null>(null);
+  const [solvedCiphers, setSolvedCiphers] = useState<CipherInfo[]>(() =>
+    makeInitialCiphers(),
+  );
 
-  const [solvedCiphers, setSolvedCiphers] = useState<CipherInfo[]>(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return makeInitialCiphers();
-      const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed?.solvedCiphers)) return parsed.solvedCiphers;
-      return makeInitialCiphers();
-    } catch {
-      return makeInitialCiphers();
-    }
-  });
-
-  // persist role + solvedCiphers to localStorage whenever they change
+  // Load initial state from localStorage
   useEffect(() => {
     try {
-      const payload = { role, solvedCiphers };
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const parsed: StoredAuth = JSON.parse(raw);
+
+      setRole(parsed.role ?? null);
+      setUsername(parsed.username ?? null);
+
+      if (Array.isArray(parsed.solvedCiphers)) {
+        setSolvedCiphers(parsed.solvedCiphers);
+      }
+    } catch {
+      console.error('error loading state from localStorage');
+    }
+  }, []);
+
+  // Persist state to localStorage whenever something changes
+  useEffect(() => {
+    try {
+      const payload: StoredAuth = { role, username, solvedCiphers };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
     } catch (err) {
       console.error(err);
     }
-  }, [role, solvedCiphers]);
+  }, [role, username, solvedCiphers]);
 
-  const login = (newRole: Role) => {
+  const login = (newRole: Role, username: string | null) => {
     setRole(newRole);
+    setUsername(username);
+    // ⚠️ don't reset solvedCiphers here, so progress persists across logins
   };
 
   const logout = () => {
     setRole(null);
+    setUsername(null);
+    // solvedCiphers remain in localStorage, not wiped
   };
 
   const markCipherSolved = (id: number, label?: string) => {
-    if (role !== 'hacker') return;
+    if (role !== 'hacker') return; // ignore for non-hackers
     setSolvedCiphers((prev) => {
       const idx = prev.findIndex((c) => c.id === id);
-      if (idx === -1) {
-        // pokud id mimo rozsah, ignoruj
-        return prev;
-      }
+      if (idx === -1) return prev;
       const now = new Date().toISOString();
-      const updated = prev.slice();
+      const updated = [...prev];
       updated[idx] = {
         ...updated[idx],
         label: label ?? updated[idx].label,
@@ -82,7 +89,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setSolvedCiphers((prev) => {
       const idx = prev.findIndex((c) => c.id === id);
       if (idx === -1) return prev;
-      const updated = prev.slice();
+      const updated = [...prev];
       updated[idx] = { ...updated[idx], solved: false, solvedAt: null };
       return updated;
     });
@@ -96,12 +103,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const getSolvedCount = () => solvedCiphers.filter((c) => c.solved).length;
 
   const resetAllCiphers = () => {
+    if (role !== 'hacker') return;
     setSolvedCiphers(makeInitialCiphers(solvedCiphers.length));
   };
 
   const value = useMemo(
     () => ({
       role,
+      username,
       login,
       logout,
       solvedCiphers,
@@ -111,7 +120,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       getSolvedCount,
       resetAllCiphers,
     }),
-    [role, solvedCiphers],
+    [role, username, solvedCiphers],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

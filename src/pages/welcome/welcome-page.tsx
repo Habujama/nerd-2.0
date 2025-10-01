@@ -2,6 +2,7 @@ import { type JSX } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/use-context';
+import { MEDIC, HACKER, MILITARY } from '../../context/types';
 import './welcome-page.css';
 import Wrapper from '../../components/wrapper';
 import EuLogo from '../../components/eu-logo';
@@ -9,21 +10,6 @@ import EuLogo from '../../components/eu-logo';
 type FormValues = {
   username: string;
   password: string;
-};
-
-const HACKER = {
-  username: 'hacker',
-  password: 'letmein123',
-};
-
-const MEDIC = {
-  username: 'medic',
-  password: 'letmein123',
-};
-
-const MILITARY = {
-  username: 'military',
-  password: 'letmein123',
 };
 
 export default function LoginPage(): JSX.Element {
@@ -41,7 +27,7 @@ export default function LoginPage(): JSX.Element {
   const navigate = useNavigate();
 
   const onSubmit = async (data: FormValues) => {
-    const users = [HACKER, MEDIC, MILITARY];
+    const users = [...HACKER, ...MEDIC, ...MILITARY];
     const user = users.find(
       (u) => u.username === data.username && u.password === data.password,
     );
@@ -53,17 +39,17 @@ export default function LoginPage(): JSX.Element {
       return;
     }
 
-    switch (user.username) {
-      case HACKER.username:
-        login('hacker');
+    switch (true) {
+      case HACKER.some((u) => u.username === user.username):
+        login('hacker', user.username);
         navigate('/hacker');
         break;
-      case MEDIC.username:
-        login('medic');
+      case MEDIC.some((u) => u.username === user.username):
+        login('medic', user.username);
         navigate('/medic');
         break;
-      case MILITARY.username:
-        login('military');
+      case MILITARY.some((u) => u.username === user.username):
+        login('military', user.username);
         navigate('/military');
         break;
     }
@@ -111,12 +97,6 @@ export default function LoginPage(): JSX.Element {
         <button type='submit' disabled={isSubmitting}>
           Přihlásit se
         </button>
-
-        <p className='hint'>
-          Uživatel: <strong>hacker | medic | military</strong>
-          <br />
-          Heslo: <strong>letmein123</strong>
-        </p>
       </form>
       <div className='eu-logo'>
         <EuLogo radius={280} starOuter={270} />
