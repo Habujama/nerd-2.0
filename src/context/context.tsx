@@ -8,7 +8,7 @@ const DEFAULT_CIPHER_COUNT = 9;
 function makeInitialCiphers(count = DEFAULT_CIPHER_COUNT): CipherInfo[] {
   return Array.from({ length: count }).map((_, idx) => ({
     id: idx,
-    label: undefined,
+    key: undefined,
     solved: false,
     solvedAt: null,
   }));
@@ -17,13 +17,13 @@ function makeInitialCiphers(count = DEFAULT_CIPHER_COUNT): CipherInfo[] {
 type StoredAuth = {
   role: Role | null;
   username: string | null;
-  solvedCiphers: CipherInfo[];
+  ciphersList: CipherInfo[];
 };
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [role, setRole] = useState<Role | null>(null);
   const [username, setUsername] = useState<string | null>(null);
-  const [solvedCiphers, setSolvedCiphers] = useState<CipherInfo[]>(() =>
+  const [ciphersList, setSolvedCiphers] = useState<CipherInfo[]>(() =>
     makeInitialCiphers(),
   );
 
@@ -37,8 +37,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setRole(parsed.role ?? null);
       setUsername(parsed.username ?? null);
 
-      if (Array.isArray(parsed.solvedCiphers)) {
-        setSolvedCiphers(parsed.solvedCiphers);
+      if (Array.isArray(parsed.ciphersList)) {
+        setSolvedCiphers(parsed.ciphersList);
       }
     } catch {
       console.error('error loading state from localStorage');
@@ -48,26 +48,26 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   // Persist state to localStorage whenever something changes
   useEffect(() => {
     try {
-      const payload: StoredAuth = { role, username, solvedCiphers };
+      const payload: StoredAuth = { role, username, ciphersList };
       localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
     } catch (err) {
       console.error(err);
     }
-  }, [role, username, solvedCiphers]);
+  }, [role, username, ciphersList]);
 
   const login = (newRole: Role, username: string | null) => {
     setRole(newRole);
     setUsername(username);
-    // ⚠️ don't reset solvedCiphers here, so progress persists across logins
+    // ⚠️ don't reset ciphersList here, so progress persists across logins
   };
 
   const logout = () => {
     setRole(null);
     setUsername(null);
-    // solvedCiphers remain in localStorage, not wiped
+    // ciphersList remain in localStorage, not wiped
   };
 
-  const markCipherSolved = (id: number, label?: string) => {
+  const markCipherSolved = (id: number, key?: string) => {
     if (role !== 'hacker') return; // ignore for non-hackers
     setSolvedCiphers((prev) => {
       const idx = prev.findIndex((c) => c.id === id);
@@ -76,7 +76,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const updated = [...prev];
       updated[idx] = {
         ...updated[idx],
-        label: label ?? updated[idx].label,
+        key: key ?? updated[idx].key,
         solved: true,
         solvedAt: now,
       };
@@ -96,15 +96,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const isCipherSolved = (id: number) => {
-    const c = solvedCiphers.find((x) => x.id === id);
+    const c = ciphersList.find((x) => x.id === id);
     return !!c && c.solved;
   };
 
-  const getSolvedCount = () => solvedCiphers.filter((c) => c.solved).length;
+  const getSolvedCount = () => ciphersList.filter((c) => c.solved).length;
 
   const resetAllCiphers = () => {
     if (role !== 'hacker') return;
-    setSolvedCiphers(makeInitialCiphers(solvedCiphers.length));
+    setSolvedCiphers(makeInitialCiphers(ciphersList.length));
   };
 
   const value = useMemo(
@@ -113,14 +113,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       username,
       login,
       logout,
-      solvedCiphers,
+      ciphersList,
       markCipherSolved,
       markCipherUnsolved,
       isCipherSolved,
       getSolvedCount,
       resetAllCiphers,
     }),
-    [role, username, solvedCiphers],
+    [role, username, ciphersList],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

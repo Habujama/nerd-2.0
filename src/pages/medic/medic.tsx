@@ -3,9 +3,9 @@ import { useState } from 'react';
 import Ekg from '../../assets/ekg.jsx';
 import MedicLogo from '../../assets/medic-logo.tsx';
 import EkgExitus from '../../assets/ekg-dead.jsx';
-import Nav from '../../components/nav.js';
-import Wrapper from '../../components/wrapper.js';
-import MedicValues from '../../components/medic-values.js';
+import Nav from '../../components/nav/nav.tsx';
+import Wrapper from '../../components/wrapper/wrapper.js';
+import MedicValues from './medic-values.js';
 
 const MedicPage = () => {
   const [isReadingDead, setIsReadingDead] = useState(false);

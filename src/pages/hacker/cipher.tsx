@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-const Cipher = () => {
+interface CipherProps {
+  id: number;
+}
+
+const Cipher = ({ id }: CipherProps) => {
   const initialGrid = [
     [1, 1, 1, 2, 4],
     [1, 3, 2, 3, 2],
@@ -101,6 +105,6 @@ const Cipher = () => {
       </button>
     </div>
   );
-}
+};
 
 export default Cipher;
