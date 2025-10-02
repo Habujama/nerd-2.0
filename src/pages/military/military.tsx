@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
-import Nav from '../../components/nav';
-import Wrapper from '../../components/wrapper';
+import Nav from '../../components/nav/nav.tsx';
+import Wrapper from '../../components/wrapper/wrapper.tsx';
 import './military.css';
-import LoadingInProgress from './loading-in-progress.js';
-import LoadingCompleted from './loading-completed.js';
-import LoadingReady from './loading-ready.js';
-import LoadingIntercepted from './loading-intercepted.js';
+import LoadingInProgress from './loading-in-progress.tsx';
+import LoadingCompleted from './loading-completed.tsx';
+import LoadingReady from './loading-ready.tsx';
+import LoadingIntercepted from './loading-intercepted.tsx';
 
 const MilitaryPage = () => {
   const [loadingStatus, setLoadingStatus] = useState([
