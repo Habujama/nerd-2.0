@@ -4,20 +4,20 @@ import { gsap } from "gsap";
 const EuLogo = ({ radius = 100, starOuter = 20 }) => {
   const groupRef = useRef(null);
 
-  const width = 2 * (radius + starOuter);
-  const height = (width * 2) / 3;
-  const cx = width / 2;
-  const cy = height / 2;
+  // Kruhový viewBox — stejné width a height
+  const size = 2 * (radius + starOuter);
+  const cx = size / 2;
+  const cy = size / 2;
 
   useEffect(() => {
     gsap.to(groupRef.current, {
       rotation: 360,
-      transformOrigin: `${cx}px ${cy}px`,
+      transformOrigin: '50% 50%', // rotace kolem středu viewBoxu
       repeat: -1,
       ease: 'linear',
       duration: 40,
     });
-  }, [cx, cy]);
+  }, []);
 
   const stars = Array.from({ length: 12 }).map((_, i) => {
     const angle = (-90 + i * 30) * (Math.PI / 180);
@@ -29,12 +29,11 @@ const EuLogo = ({ radius = 100, starOuter = 20 }) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      viewBox={`0 0 ${width} ${height}`}
-      width={width}
-      height={height}
+      viewBox={`0 0 ${size} ${size}`}
+      width={size}
+      height={size}
       role='img'
       aria-label='Flag of the European Union'
-      ref={groupRef}
     >
       <defs>
         <g id='star' fill='#fff'>
@@ -53,7 +52,7 @@ const EuLogo = ({ radius = 100, starOuter = 20 }) => {
           />
         </g>
       </defs>
-      <g>{stars}</g>
+      <g ref={groupRef}>{stars}</g>
     </svg>
   );
 };

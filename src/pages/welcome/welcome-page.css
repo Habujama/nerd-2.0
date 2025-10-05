@@ -21,14 +21,22 @@
 }
 
 .eu-logo {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  overflow: hidden;
+  width: min(60vmin, 620px);
+  height: auto;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
 }
 
 .eu-logo svg {
-  overflow: hidden;
+  display: block;
+  height: auto;
+  overflow: visible;
+  max-height: 100vh;
 }
