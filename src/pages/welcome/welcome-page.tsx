@@ -99,7 +99,7 @@ export default function LoginPage(): JSX.Element {
         </button>
       </form>
       <div className='eu-logo'>
-        <EuLogo radius={280} starOuter={270} />
+        <EuLogo radius={260} starOuter={250} />
       </div>
     </Wrapper>
   );

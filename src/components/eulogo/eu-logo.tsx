@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 
-const EuLogo = ({ radius = 180, starOuter = 30 }) => {
+const EuLogo = ({ radius = 100, starOuter = 20 }) => {
   const groupRef = useRef(null);
 
   const width = 2 * (radius + starOuter);
@@ -23,23 +23,23 @@ const EuLogo = ({ radius = 180, starOuter = 30 }) => {
     const angle = (-90 + i * 30) * (Math.PI / 180);
     const x = cx + radius * Math.cos(angle);
     const y = cy + radius * Math.sin(angle);
-    return <use key={i} href="#star" x={x} y={y} />;
+    return <use key={i} href='#star' x={x} y={y} />;
   });
 
   return (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
+      xmlns='http://www.w3.org/2000/svg'
       viewBox={`0 0 ${width} ${height}`}
       width={width}
       height={height}
-      role="img"
-          aria-label="Flag of the European Union"
-          ref={groupRef}
+      role='img'
+      aria-label='Flag of the European Union'
+      ref={groupRef}
     >
       <defs>
-        <g id="star" fill="#fff">
+        <g id='star' fill='#fff'>
           <polygon
-            points="
+            points='
               0,-30
               6.735,-9.271
               28.532,-9.271
@@ -49,7 +49,7 @@ const EuLogo = ({ radius = 180, starOuter = 30 }) => {
               -17.634,24.271
               -10.898,3.541
               -28.532,-9.271
-              -6.735,-9.271"
+              -6.735,-9.271'
           />
         </g>
       </defs>
