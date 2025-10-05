@@ -29,7 +29,7 @@ const MilitaryPage = () => {
     loadingStatus.forEach((val, i) => {
       if (val && !prevStatusRef.current[i]) {
         // přehraj zvuk
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const ctx = new (window.AudioContext || window.AudioContext)();
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
 
@@ -55,7 +55,7 @@ const MilitaryPage = () => {
       setLoadingIntercepted(false);
       setIsLoading(false);
       const timeout = setTimeout(() => {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const ctx = new (window.AudioContext || window.AudioContext)();
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
 

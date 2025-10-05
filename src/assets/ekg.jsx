@@ -10,7 +10,7 @@ export default function EkgRealisticMulti({
   const [pathData, setPathData] = useState("");
 
   const playBeep = () => {
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const ctx = new (window.AudioContext || window.AudioContext)();
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
 

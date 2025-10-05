@@ -44,7 +44,7 @@ export default function EkgExitus({
 
   // stálý tón
   useEffect(() => {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const ctx = new (window.AudioContext || window.AudioContext)();
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
 

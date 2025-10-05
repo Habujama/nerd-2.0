@@ -5,6 +5,7 @@ interface CipherProps {
 }
 
 const Cipher = ({ id }: CipherProps) => {
+  console.info(id);
   const initialGrid = [
     [1, 1, 1, 2, 4],
     [1, 3, 2, 3, 2],
