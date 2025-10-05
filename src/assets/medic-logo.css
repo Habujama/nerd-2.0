@@ -1,0 +1,38 @@
+  .med-wrap {
+    max-width: 100%;
+    display: inline-block;
+    border-radius: 100%;
+    filter: drop-shadow(0 0 1em rgba(131, 248, 201, 0.5));
+    background: #0A0F0D;     /* požadované čisté pozadí */
+    padding: 18px;           /* prostor kolem kříže */
+    box-sizing: border-box;
+    perspective: 900px;
+    -webkit-perspective: 900px;
+    margin-bottom: 4rem;
+  }
+
+  /* samotné SVG (3D rotace kolem svislé osy) */
+  .med-cross {
+    display: block;
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    transform-origin: 50% 50%;
+    animation: cross-spin 6s linear infinite;
+    will-change: transform;
+  }
+
+  @keyframes cross-spin {
+    from { transform: perspective(900px) rotateY(0deg); }
+    50%  { transform: perspective(900px) rotateY(180deg); }
+    to   { transform: perspective(900px) rotateY(360deg); }
+  }
+
+  /* zpomalení animace při hoveru (volitelné) */
+  .med-wrap:hover .med-cross {
+    animation-duration: 12s;
+  }
+
+  /* preferované snížení pohybu */
+  @media (prefers-reduced-motion: reduce) {
+    .med-cross { animation: none; transform: perspective(900px) rotateY(0deg); }
+  }

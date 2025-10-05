@@ -14,8 +14,8 @@ const EuLogo = ({ radius = 180, starOuter = 30 }) => {
       rotation: 360,
       transformOrigin: `${cx}px ${cy}px`,
       repeat: -1,
-      ease: "linear",
-      duration: 40, // jedna otáčka za 20s, klidně zkrať/zrychli
+      ease: 'linear',
+      duration: 40,
     });
   }, [cx, cy]);
 

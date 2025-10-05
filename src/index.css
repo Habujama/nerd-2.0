@@ -37,13 +37,13 @@ h1 {
 
 button {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #66FFB2;
-    border-radius: 0%;
-    color: white;
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #66FFB2;
+  border-radius: 0%;
+  color: white;
   cursor: pointer;
-  background: transparent
+  background-color: #0A0F0D;
   }
   
   button:hover,
@@ -68,15 +68,15 @@ button {
     font-size: 0.9rem;
   }
   
-  label > .error {
+  .error {
     color: #FF4D4D;
     font-size: 0.8rem;
-    margin-top: -0.5rem;
   }
   
-  label>.input-clear {
+  label> .input-clear {
     margin-bottom: 22px;
-  }
+}
+
 input {
   display: block;
   width: 100%;
@@ -88,10 +88,23 @@ input {
   box-sizing: border-box;
   margin-top: 0.25rem;
 }
+
 input:focus {
   border-color: #00CC66;
   outline: none;
   box-shadow: 0 0 5px #00CC66;
+}
+
+.input-error {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  background: black;
+  color: white;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 0.25rem;
+  border: 0.5px solid #FF4D4D;
 }
 
 @media (prefers-color-scheme: light) {

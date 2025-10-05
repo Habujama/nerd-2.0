@@ -1,6 +1,6 @@
 import './noise.css'
 
-const NUM_LINES = 4;
+const NUM_LINES = 20;
 
 const NoiseLines = () => {
   return (

@@ -2,28 +2,14 @@ import { type JSX } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/use-context';
+import { MEDIC, HACKER, MILITARY } from '../../context/types';
 import './welcome-page.css';
-import Wrapper from '../../components/wrapper';
-import EuLogo from '../../components/eu-logo';
+import Wrapper from '../../components/wrapper/wrapper';
+import EuLogo from '../../components/eulogo/eu-logo';
 
 type FormValues = {
   username: string;
   password: string;
-};
-
-const HACKER = {
-  username: 'hacker',
-  password: 'letmein123',
-};
-
-const MEDIC = {
-  username: 'medic',
-  password: 'letmein123',
-};
-
-const MILITARY = {
-  username: 'military',
-  password: 'letmein123',
 };
 
 export default function LoginPage(): JSX.Element {
@@ -31,7 +17,8 @@ export default function LoginPage(): JSX.Element {
     register,
     handleSubmit,
     setError,
-    formState: { errors, isSubmitting },
+    clearErrors,
+    formState: { errors, isSubmitting, isDirty },
   } = useForm<FormValues>({
     defaultValues: { username: '', password: '' },
     mode: 'onSubmit',
@@ -41,29 +28,30 @@ export default function LoginPage(): JSX.Element {
   const navigate = useNavigate();
 
   const onSubmit = async (data: FormValues) => {
-    const users = [HACKER, MEDIC, MILITARY];
+    const users = [...HACKER, ...MEDIC, ...MILITARY];
+    const usernameLowerCase = data.username.toLowerCase();
     const user = users.find(
-      (u) => u.username === data.username && u.password === data.password,
+      (u) => u.username === usernameLowerCase && u.password === data.password,
     );
     if (!user) {
-      setError('password', {
+      setError('root', {
         type: 'manual',
         message: 'Špatné uživatelské jméno nebo heslo.',
       });
       return;
     }
 
-    switch (user.username) {
-      case HACKER.username:
-        login('hacker');
+    switch (true) {
+      case HACKER.some((u) => u.username === usernameLowerCase):
+        login('hacker', usernameLowerCase);
         navigate('/hacker');
         break;
-      case MEDIC.username:
-        login('medic');
+      case MEDIC.some((u) => u.username === usernameLowerCase):
+        login('medic', usernameLowerCase);
         navigate('/medic');
         break;
-      case MILITARY.username:
-        login('military');
+      case MILITARY.some((u) => u.username === usernameLowerCase):
+        login('military', usernameLowerCase);
         navigate('/military');
         break;
     }
@@ -72,7 +60,7 @@ export default function LoginPage(): JSX.Element {
   return (
     <Wrapper alignStart={false}>
       <form className='login-form' onSubmit={handleSubmit(onSubmit)}>
-        <h2 style={{ color: '#66FFB2' }}>N. E. R. D. 2.0</h2>
+        <h2 style={{ color: '#66FFB2' }}>N E R D 2.0</h2>
         <label>
           Uživatelské jméno
           <input
@@ -82,13 +70,9 @@ export default function LoginPage(): JSX.Element {
             aria-invalid={!!errors.username}
             aria-describedby='username-error'
             autoComplete='username'
-            className={!errors.username ? 'input-clear' : ''}
+            onBlur={() => clearErrors()}
+            className={errors.root ? 'input-error' : 'input-clear'}
           />
-          {errors.username && (
-            <span id='username-error' role='alert' className='error'>
-              {errors.username.message}
-            </span>
-          )}
         </label>
 
         <label>
@@ -99,24 +83,20 @@ export default function LoginPage(): JSX.Element {
             aria-invalid={!!errors.password}
             aria-describedby='password-error'
             autoComplete='current-password'
-            className={!errors.password ? 'input-clear' : ''}
+            onBlur={() => clearErrors()}
+            className={errors.root ? 'input-error' : 'input-clear'}
           />
-          {errors.password && (
-            <span id='password-error' role='alert' className='error'>
-              {errors.password.message}
-            </span>
-          )}
         </label>
 
-        <button type='submit' disabled={isSubmitting}>
+        {errors.root && (
+          <p id='password-error' role='alert' className='error'>
+            {errors.root?.message}
+          </p>
+        )}
+
+        <button type='submit' disabled={isSubmitting || !isDirty}>
           Přihlásit se
         </button>
-
-        <p className='hint'>
-          Uživatel: <strong>hacker | medic | military</strong>
-          <br />
-          Heslo: <strong>letmein123</strong>
-        </p>
       </form>
       <div className='eu-logo'>
         <EuLogo radius={280} starOuter={270} />

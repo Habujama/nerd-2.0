@@ -1,4 +1,4 @@
-import NoiseLines from './noise';
+import NoiseLines from '../noise/noise';
 import './wrapper.css';
 
 const Wrapper = ({
