@@ -9,7 +9,7 @@ const Wrapper = ({
   alignStart?: boolean;
 }) => {
   return (
-    <div className='wrapper-container'>
+    <>
       <NoiseLines />
       <div
         className='wrapper'
@@ -17,7 +17,7 @@ const Wrapper = ({
       >
         {children}
       </div>
-    </div>
+    </>
   );
 };
 
