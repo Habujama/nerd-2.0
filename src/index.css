@@ -105,16 +105,3 @@ input:focus {
   margin-top: 0.25rem;
   border: 0.5px solid #FF4D4D;
 }
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #00CC66;
-  }
-  button {
-    background-color: #66FFB2;
-  }
-}
