@@ -1,18 +1,13 @@
 import { useState } from "react";
+import { ciphers } from './game-data.ts';
 
-interface CipherProps {
+interface MiniGameProps {
   id: number;
 }
 
-const Cipher = ({ id }: CipherProps) => {
-  console.info(id);
-  const initialGrid = [
-    [1, 1, 1, 2, 4],
-    [1, 3, 2, 3, 2],
-    [4, 3, 1, 3, 1],
-    [4, 3, 4, 3, 3],
-    [1, 2, 3, 3, 'FIN'],
-  ];
+const MiniGame = ({ id }: MiniGameProps) => {
+  const initialGrid: (string | number)[][] =
+    ciphers.find((c) => c.id === id)?.grid ?? ciphers[0].grid;
 
   const size = initialGrid.length;
 
@@ -108,4 +103,4 @@ const Cipher = ({ id }: CipherProps) => {
   );
 };
 
-export default Cipher;
+export default MiniGame;
