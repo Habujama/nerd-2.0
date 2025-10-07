@@ -23,7 +23,6 @@ export type AuthContextType = {
   markCipherSolved: (key: string) => void;
   markCipherUnsolved: (key: string) => void;
   getSolvedCount: () => number;
-
   // utility
   resetAllCiphers: () => void;
 };
@@ -34,11 +33,21 @@ export const CipherKeys = [
 export type Matrix = string[]; // each element is e.g. "WIF" or "IFIW"
 
 export const MazeMatrix: Record<number, Matrix> = {
-  0: ["WI", "WII"],     
-  1: ["WFI", "IWFI", "WI"],
+  0: ["WI", "WII", "FFWI", "IWFI", "WIIFI"],     
+  1: [],
   2: ["FFWI", "IWFI", "WIFI", "IIFW"], 
   3: ["FFWI", "IWFI", "WIFI", "IIFW"],
-  4: ["FIFIW", "FIWFI", "FWFFI","IFIFW"], 
+  4: ["FIFIW", "FIWFI", "FWFFI", "IFIFW"], 
+};
+
+export const ROUTE_MAP: Record<string, string> = {
+  "533VZP1": "/hacker/target/alpha-01",
+  "227PRT3": "/hacker/target/echo-02",
+  "648ZUU2": "/hacker/target/omega-03",
+  "694LEX7": "/hacker/target/nyx-04",
+  "623BEL1": "/hacker/target/kv-05",
+  "789PYK6": "/hacker/target/tau-06",
+  "753ZFZ3": "/hacker/target/sigma-07",
 };
 
 export const HACKER = [

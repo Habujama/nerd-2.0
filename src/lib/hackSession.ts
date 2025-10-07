@@ -1,6 +1,5 @@
 export type Session = {
   sessionId: string;
-  code: string;
   mazeDef: string[];
   visited: string[];
   level: number;

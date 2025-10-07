@@ -7,7 +7,7 @@ type FormValues = {
 
 interface CipherInputProps {
   ciphersList: CipherInfo[];
-  startSession: (code: string) => void;
+  startSession: (id: string) => void;
 }
 
 const CipherInput = ({ ciphersList, startSession }: CipherInputProps) => {

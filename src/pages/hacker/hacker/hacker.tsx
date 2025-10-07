@@ -15,8 +15,8 @@ export default function Hacker() {
   const { ciphersList, isCipherSolved } = useAuth();
   const navigate = useNavigate();
 
-  function startSession(code: string) {
-    const normalized = code.trim().toUpperCase();
+  function startSession(id: string) {
+    const normalized = id.trim().toUpperCase();
 
     const cipher = ciphersList.find((c) => c.key === normalized);
     if (!cipher) {
@@ -24,21 +24,32 @@ export default function Hacker() {
       return;
     }
 
+    let session = {
+      sessionId: normalized,
+      mazeDef: cipher.mazeDef,
+      visited: [],
+      level: 0,
+      maxLevels: cipher.mazeDef.length,
+      startedAt: Date.now(),
+    };
+
     if (
       !cipher.mazeDef ||
       !Array.isArray(cipher.mazeDef) ||
       cipher.mazeDef.length === 0
     ) {
-      console.warn(
-        'Cipher has no mazeDef configured, cannot start session:',
-        normalized,
-      );
-      return;
+      session = {
+        sessionId: normalized,
+        mazeDef: [],
+        visited: [],
+        level: 0,
+        maxLevels: cipher.mazeDef.length,
+        startedAt: Date.now(),
+      };
     }
 
-    const session = {
+    session = {
       sessionId: normalized,
-      code: normalized,
       mazeDef: cipher.mazeDef,
       visited: [],
       level: 0,

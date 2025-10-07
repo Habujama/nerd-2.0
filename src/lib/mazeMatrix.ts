@@ -8,7 +8,7 @@ export interface Node {
   y: number;
 }
 
-export function nodesFromMatrix(sessionId: string, pattern: string, level = 0): Node[] {
+export function nodesFromMatrix(id: string, pattern: string, level = 0): Node[] {
   const nodes: Node[] = [];
   const spacing = 800 / (pattern.length + 1);
 
@@ -18,8 +18,8 @@ export function nodesFromMatrix(sessionId: string, pattern: string, level = 0): 
       char === 'F' ? 'FAIL' :
       'INACTIVE';
     nodes.push({
-      id: `${sessionId}-${level}-${i}`,
-      label: `${sessionId}-${i}`,
+      id: `${id}-${level}-${i}`,
+      label: `${id}-${i}`,
       type,
       x: spacing * (i + 1),
       y: 100 + level * 120,

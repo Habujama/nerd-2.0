@@ -26,7 +26,6 @@ export default function Session() {
       return;
     }
 
-    // pokud session existuje, ale nemá mazeDef, pokusíme se o migraci (fallback: dohledat cipher)
     if (!s.mazeDef || !Array.isArray(s.mazeDef) || s.mazeDef.length === 0) {
       const storedCiphers = JSON.parse(
         localStorage.getItem('ciphersList') || '[]',
@@ -45,11 +44,13 @@ export default function Session() {
           sessionId,
         );
       } else {
-        console.warn(
-          'No mazeDef available for session and no cipher to migrate from:',
-          sessionId,
-        );
-        navigate('/hacker', { replace: true });
+        const skipped: Session = {
+          ...s,
+          completed: true,
+        };
+        saveSession(skipped);
+        localStorage.setItem('last_unlocked', s.sessionId);
+        navigate(`/hacker/session/${s.sessionId}/result`);
         return;
       }
     }
@@ -98,7 +99,7 @@ export default function Session() {
         visited: [...(session.visited || []), node.id],
       };
 
-      const maxLevels = session.mazeDef!.length; // už validováno výše
+      const maxLevels = session.mazeDef!.length;
 
       if (newLevel >= maxLevels) {
         updated.completed = true;
