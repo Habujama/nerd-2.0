@@ -34,7 +34,6 @@ const CipherInput = ({ ciphersList, startSession }: CipherInputProps) => {
     }
 
     startSession(normalized);
-    /* navigate(`/hacker/session/${normalized}`); */
     return;
   };
 
@@ -56,7 +55,6 @@ const CipherInput = ({ ciphersList, startSession }: CipherInputProps) => {
           </span>
         )}
       </label>
-      <p>533VZP1</p>
       <button
         type='submit'
         disabled={isSubmitting || (isDirty && !!errors.cipherKey)}

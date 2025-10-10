@@ -1,0 +1,25 @@
+.pwd-gate-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    gap: 3rem;
+}
+
+.pwd-link-button {
+    text-decoration: underline;
+    border: none;
+    background-color: transparent;
+}
+
+.pwd-link-button:hover {
+    background-color: transparent;
+    border:none;
+    color: #00CC66;
+}
+
+.pwd-link-button:active:focus {
+    background-color: transparent;
+    border:none;
+    color: #00CC66;
+    box-shadow: none;
+}

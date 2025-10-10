@@ -1,12 +1,4 @@
-export type Session = {
-  sessionId: string;
-  mazeDef: string[];
-  visited: string[];
-  level: number;
-  maxLevels: number;
-  startedAt: number;
-  completed?: boolean;
-};
+import type { Session } from '../context/types';
 
 const keyFor = (sessionId: string) => `hack_session_${sessionId}`;
 

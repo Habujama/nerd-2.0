@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import type { CipherInfo, Role } from './types';
-import { AuthContext } from "./types";
+import { AuthContext, NodePasswords } from './types';
 import { CipherKeys, MazeMatrix } from './types';
 
 const STORAGE_KEY = 'postapok_auth_v1';
@@ -11,7 +11,7 @@ function makeInitialCiphers(): CipherInfo[] {
     key,
     mazeDef: MazeMatrix[id],
     solved: false,
-    password: undefined,
+    password: NodePasswords[id],
     solvedAt: null,
   }));
 }

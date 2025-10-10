@@ -71,6 +71,7 @@ export default function LoginPage(): JSX.Element {
             aria-describedby='username-error'
             autoComplete='username'
             onBlur={() => clearErrors()}
+            placeholder='Zadej uživatelské jméno'
             className={errors.root ? 'input-error' : 'input-clear'}
           />
         </label>
@@ -84,6 +85,7 @@ export default function LoginPage(): JSX.Element {
             aria-describedby='password-error'
             autoComplete='current-password'
             onBlur={() => clearErrors()}
+            placeholder='Zadej heslo'
             className={errors.root ? 'input-error' : 'input-clear'}
           />
         </label>

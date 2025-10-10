@@ -9,8 +9,19 @@ export type CipherInfo = {
   key: string;
   mazeDef: string[];
   solved: boolean;
-  password?: string;
+  password: string | null;
   solvedAt?: string | null;
+};
+
+export type Session = {
+  sessionId: string;
+  mazeDef: string[];
+  visited: string[];
+  level: number;
+  maxLevels: number;
+  startedAt: number;
+  password: string | null;
+  completed?: boolean;
 };
 
 export type AuthContextType = {
@@ -49,6 +60,26 @@ export const ROUTE_MAP: Record<string, string> = {
   "789PYK6": "/hacker/result/sigma-07",
   "753ZFZ3": "/hacker/result/beta-08",
 };
+
+export const NODE_KEY_MAP: Record<string, string> = {
+  '533VZP1': 'alpha-01',
+  '227PRT3': 'omega-03',
+  '648ZUU2': 'nyx-04',
+  '694LEX7': 'kv-05',
+  '623BEL1':  'tau-06',
+  '789PYK6':'sigma-07', 
+  '753ZFZ3': 'beta-08',
+};
+
+export const NodePasswords: Record<number, string | null> = {
+  0: null,
+  1: 'Syntagma',
+  2: null,
+  3: null,
+  4: null,
+  5: null,
+  6: null,
+}
 
 export const HACKER = [
   {

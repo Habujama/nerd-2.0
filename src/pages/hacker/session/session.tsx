@@ -8,6 +8,7 @@ import {
 } from '../../../lib/hackSession';
 import { ROUTE_MAP } from '../../../context/types';
 import { useAuth } from '../../../context/use-context';
+import Wrapper from '../../../components/wrapper/wrapper';
 
 export default function Session() {
   const { sessionId } = useParams<{ sessionId: string }>();
@@ -100,8 +101,11 @@ export default function Session() {
   }
 
   return (
-    <div style={{ width: '100%', height: 600, position: 'relative' }}>
-      <svg viewBox='0 0 800 600' style={{ width: '100%', height: '100%' }}>
+    <Wrapper>
+      <svg
+        viewBox='0 0 800 1000'
+        style={{ width: '100%', height: '100%', overflow: 'scroll' }}
+      >
         {nodes.map((n) => (
           <g
             key={n.id}
@@ -125,6 +129,6 @@ export default function Session() {
           </g>
         ))}
       </svg>
-    </div>
+    </Wrapper>
   );
 }

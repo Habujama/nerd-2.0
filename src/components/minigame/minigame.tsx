@@ -1,17 +1,19 @@
 import { useState } from "react";
 import { ciphers } from './game-data.ts';
+import './minigame.css';
 
 interface MiniGameProps {
-  id: number;
+  sessionId: string;
+  setGameWon: (gameWon: boolean) => void;
 }
 
-const MiniGame = ({ id }: MiniGameProps) => {
+const MiniGame = ({ sessionId, setGameWon }: MiniGameProps) => {
   const initialGrid: (string | number)[][] =
-    ciphers.find((c) => c.id === id)?.grid ?? ciphers[0].grid;
+    ciphers.find((cipher) => cipher.sessionId === sessionId)?.grid ??
+    ciphers[0].grid;
 
   const size = initialGrid.length;
 
-  // Aktuální pozice hráče
   const [currentPos, setCurrentPos] = useState([0, 0]);
   const [available, setAvailable] = useState([[0, 0]]); // povolené tahy
 
@@ -21,7 +23,7 @@ const MiniGame = ({ id }: MiniGameProps) => {
 
     const value = initialGrid[row][col];
     if (value === 'FIN') {
-      alert('Soubor odemčen');
+      setGameWon(true);
       return;
     }
 
@@ -29,7 +31,6 @@ const MiniGame = ({ id }: MiniGameProps) => {
     const newAvailable: ((prevState: number[][]) => number[][]) | number[][] =
       [];
 
-    // spočítáme nové možné tahy
     const directions = [
       [step, 0],
       [-step, 0],
@@ -52,11 +53,10 @@ const MiniGame = ({ id }: MiniGameProps) => {
   return (
     <div className='cipher-container'>
       <div
-        className='cipher-grid'
         style={{
           display: 'grid',
           gridTemplateColumns: `repeat(${size}, 60px)`,
-          gap: '6px',
+          gap: '12px',
         }}
       >
         {initialGrid.map((row, r) =>
@@ -81,7 +81,6 @@ const MiniGame = ({ id }: MiniGameProps) => {
                       ? '#FF4D4D'
                       : '#00CC66'
                     : '#0A0F0D',
-                  fontWeight: 'bold',
                 }}
               >
                 {cell}
