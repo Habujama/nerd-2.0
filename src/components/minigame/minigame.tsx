@@ -1,22 +1,19 @@
 import { useState } from "react";
+import { ciphers } from './game-data.ts';
+import './minigame.css';
 
-interface CipherProps {
-  id: number;
+interface MiniGameProps {
+  sessionId: string;
+  setGameWon: (gameWon: boolean) => void;
 }
 
-const Cipher = ({ id }: CipherProps) => {
-  console.info(id);
-  const initialGrid = [
-    [1, 1, 1, 2, 4],
-    [1, 3, 2, 3, 2],
-    [4, 3, 1, 3, 1],
-    [4, 3, 4, 3, 3],
-    [1, 2, 3, 3, 'FIN'],
-  ];
+const MiniGame = ({ sessionId, setGameWon }: MiniGameProps) => {
+  const initialGrid: (string | number)[][] =
+    ciphers.find((cipher) => cipher.sessionId === sessionId)?.grid ??
+    ciphers[0].grid;
 
   const size = initialGrid.length;
 
-  // Aktuální pozice hráče
   const [currentPos, setCurrentPos] = useState([0, 0]);
   const [available, setAvailable] = useState([[0, 0]]); // povolené tahy
 
@@ -26,7 +23,7 @@ const Cipher = ({ id }: CipherProps) => {
 
     const value = initialGrid[row][col];
     if (value === 'FIN') {
-      alert('Soubor odemčen');
+      setGameWon(true);
       return;
     }
 
@@ -34,7 +31,6 @@ const Cipher = ({ id }: CipherProps) => {
     const newAvailable: ((prevState: number[][]) => number[][]) | number[][] =
       [];
 
-    // spočítáme nové možné tahy
     const directions = [
       [step, 0],
       [-step, 0],
@@ -57,11 +53,10 @@ const Cipher = ({ id }: CipherProps) => {
   return (
     <div className='cipher-container'>
       <div
-        className='cipher-grid'
         style={{
           display: 'grid',
           gridTemplateColumns: `repeat(${size}, 60px)`,
-          gap: '6px',
+          gap: '12px',
         }}
       >
         {initialGrid.map((row, r) =>
@@ -86,7 +81,6 @@ const Cipher = ({ id }: CipherProps) => {
                       ? '#FF4D4D'
                       : '#00CC66'
                     : '#0A0F0D',
-                  fontWeight: 'bold',
                 }}
               >
                 {cell}
@@ -108,4 +102,4 @@ const Cipher = ({ id }: CipherProps) => {
   );
 };
 
-export default Cipher;
+export default MiniGame;

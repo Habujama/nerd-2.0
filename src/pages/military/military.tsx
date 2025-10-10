@@ -76,10 +76,6 @@ const MilitaryPage = () => {
     }
   }, [loadingStatus]);
 
-  console.log(isLoading, 'isLoading');
-  console.log(loadingIntercepted, 'interceped');
-  console.log(loadingStatus.filter(Boolean).length < 5, '< 5');
-
   return (
     <Wrapper>
       <Nav />

@@ -1,0 +1,39 @@
+.cipher-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 4rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.cipher-list li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #0A0F0D;
+    padding: 2rem;
+    text-align: center;
+    height: 7rem;
+}
+
+.cipher-banner {
+    border: 1px solid #fff;
+    justify-content: center;
+}
+
+.cipher-list button {
+    width: fit-content;
+    border: none;
+    text-decoration: underline;
+    border-radius: 2px;
+}
+
+@media screen and (max-width: 600px) {
+    .cipher-list {
+        grid-template-columns: 1fr; 
+        width: 80%;
+    }
+}

@@ -1,15 +1,17 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import type { CipherInfo, Role } from './types';
-import { AuthContext } from "./types";
+import { AuthContext, NodePasswords } from './types';
+import { CipherKeys, MazeMatrix } from './types';
 
-const STORAGE_KEY = "postapok_auth_v1";
-const DEFAULT_CIPHER_COUNT = 9;
+const STORAGE_KEY = 'postapok_auth_v1';
 
-function makeInitialCiphers(count = DEFAULT_CIPHER_COUNT): CipherInfo[] {
-  return Array.from({ length: count }).map((_, idx) => ({
-    id: idx,
-    key: undefined,
+function makeInitialCiphers(): CipherInfo[] {
+  return CipherKeys.map((key, id) => ({
+    id,
+    key,
+    mazeDef: MazeMatrix[id],
     solved: false,
+    password: NodePasswords[id],
     solvedAt: null,
   }));
 }
@@ -64,13 +66,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     setRole(null);
     setUsername(null);
-    // ciphersList remain in localStorage, not wiped
+    // ⚠️ don't reset ciphersList here, so progress persists across logins
   };
 
-  const markCipherSolved = (id: number, key?: string) => {
-    if (role !== 'hacker') return; // ignore for non-hackers
+  const markCipherSolved = (key: string) => {
+    if (role !== 'hacker') return;
     setSolvedCiphers((prev) => {
-      const idx = prev.findIndex((c) => c.id === id);
+      const idx = prev.findIndex((c) => c.key === key);
       if (idx === -1) return prev;
       const now = new Date().toISOString();
       const updated = [...prev];
@@ -84,10 +86,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const markCipherUnsolved = (id: number) => {
+  const markCipherUnsolved = (key: string) => {
     if (role !== 'hacker') return;
     setSolvedCiphers((prev) => {
-      const idx = prev.findIndex((c) => c.id === id);
+      const idx = prev.findIndex((c) => c.key === key);
       if (idx === -1) return prev;
       const updated = [...prev];
       updated[idx] = { ...updated[idx], solved: false, solvedAt: null };
@@ -95,8 +97,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     });
   };
 
-  const isCipherSolved = (id: number) => {
-    const c = ciphersList.find((x) => x.id === id);
+  const isCipherSolved = (key: string) => {
+    const c = ciphersList.find((x) => x.key === key);
     return !!c && c.solved;
   };
 
@@ -104,7 +106,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const resetAllCiphers = () => {
     if (role !== 'hacker') return;
-    setSolvedCiphers(makeInitialCiphers(ciphersList.length));
+    setSolvedCiphers(makeInitialCiphers());
   };
 
   const value = useMemo(

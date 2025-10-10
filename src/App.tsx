@@ -1,12 +1,14 @@
 import type { ReactNode } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import './App.css';
-import Hacker from './pages/hacker/hacker';
+import Hacker from './pages/hacker/hacker/hacker';
 import Medic from './pages/medic/medic';
 import Military from './pages/military/military';
 import WelcomePage from './pages/welcome/welcome-page';
 import { AuthProvider } from './context/context';
 import { useAuth } from './context/use-context';
+import Session from './pages/hacker/session/session';
+import Result from './pages/hacker/result/result';
 
 function RequireAuth({
   children,
@@ -32,6 +34,30 @@ function App() {
         <Route path='/' element={<WelcomePage />} />
         <Route
           path='/hacker'
+          element={
+            <RequireAuth allowedRole='hacker'>
+              <Hacker />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path='/hacker/session/:sessionId'
+          element={
+            <RequireAuth allowedRole='hacker'>
+              <Session />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path='/hacker/result/:name'
+          element={
+            <RequireAuth allowedRole='hacker'>
+              <Result />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path='/chat-unlocked'
           element={
             <RequireAuth allowedRole='hacker'>
               <Hacker />
