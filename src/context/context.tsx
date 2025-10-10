@@ -6,14 +6,35 @@ import { CipherKeys, MazeMatrix } from './types';
 const STORAGE_KEY = 'postapok_auth_v1';
 
 function makeInitialCiphers(): CipherInfo[] {
-  return CipherKeys.map((key, id) => ({
-    id,
+  return CipherKeys.map((key, idx) => ({
+    id: idx,
     key,
-    mazeDef: MazeMatrix[id],
+    mazeDef: MazeMatrix[idx] ?? [],
     solved: false,
-    password: NodePasswords[id],
+    password: NodePasswords[idx] ?? null,
     solvedAt: null,
   }));
+}
+
+function loadCiphersFromStorage(): CipherInfo[] {
+  try {
+    const raw = localStorage.getItem('ciphersList');
+    if (!raw) return makeInitialCiphers();
+
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return makeInitialCiphers();
+    return parsed.map((c: Partial<CipherInfo>, idx: number) => ({
+      id: c.id ?? idx,
+      key: c.key ?? CipherKeys[idx],
+      mazeDef: Array.isArray(c.mazeDef) ? c.mazeDef : MazeMatrix[idx] ?? [],
+      solved: !!c.solved,
+      password: c.password ?? NodePasswords[idx] ?? null,
+      solvedAt: c.solvedAt ?? null,
+    }));
+  } catch (err) {
+    console.error('loadCiphersFromStorage error:', err);
+    return makeInitialCiphers();
+  }
 }
 
 type StoredAuth = {
@@ -25,9 +46,7 @@ type StoredAuth = {
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [role, setRole] = useState<Role | null>(null);
   const [username, setUsername] = useState<string | null>(null);
-  const [ciphersList, setSolvedCiphers] = useState<CipherInfo[]>(() =>
-    makeInitialCiphers(),
-  );
+  const [ciphersList, setCiphersList] = useState<CipherInfo[]>([]);
 
   // Load initial state from localStorage
   useEffect(() => {
@@ -38,10 +57,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
       setRole(parsed.role ?? null);
       setUsername(parsed.username ?? null);
-
-      if (Array.isArray(parsed.ciphersList)) {
-        setSolvedCiphers(parsed.ciphersList);
-      }
+      const loadedCiphersFromStorage = loadCiphersFromStorage();
+      console.log(loadedCiphersFromStorage, 'looooa');
+      setCiphersList(loadedCiphersFromStorage);
     } catch {
       console.error('error loading state from localStorage');
     }
@@ -71,7 +89,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const markCipherSolved = (key: string) => {
     if (role !== 'hacker') return;
-    setSolvedCiphers((prev) => {
+    setCiphersList((prev) => {
       const idx = prev.findIndex((c) => c.key === key);
       if (idx === -1) return prev;
       const now = new Date().toISOString();
@@ -88,7 +106,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const markCipherUnsolved = (key: string) => {
     if (role !== 'hacker') return;
-    setSolvedCiphers((prev) => {
+    setCiphersList((prev) => {
       const idx = prev.findIndex((c) => c.key === key);
       if (idx === -1) return prev;
       const updated = [...prev];
@@ -106,7 +124,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const resetAllCiphers = () => {
     if (role !== 'hacker') return;
-    setSolvedCiphers(makeInitialCiphers());
+    setCiphersList(makeInitialCiphers());
   };
 
   const value = useMemo(
