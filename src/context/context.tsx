@@ -29,8 +29,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     makeInitialCiphers(),
   );
 
-  console.log(ciphersList, 'ciphersList');
-
   // Load initial state from localStorage
   useEffect(() => {
     try {

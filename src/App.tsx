@@ -49,7 +49,7 @@ function App() {
           }
         />
         <Route
-          path='/hacker/session/:sessionId/result'
+          path='/hacker/result/:name'
           element={
             <RequireAuth allowedRole='hacker'>
               <Result />

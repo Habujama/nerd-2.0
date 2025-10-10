@@ -17,51 +17,28 @@ export default function Hacker() {
 
   function startSession(id: string) {
     const normalized = id.trim().toUpperCase();
-
     const cipher = ciphersList.find((c) => c.key === normalized);
+
     if (!cipher) {
-      console.warn('Cipher not found for session (startSession):', normalized);
+      console.warn('Cipher not found for session:', normalized);
       return;
     }
 
-    let session = {
+    const mazeDef = Array.isArray(cipher.mazeDef) ? cipher.mazeDef : [];
+
+    const session = {
       sessionId: normalized,
-      mazeDef: cipher.mazeDef,
+      mazeDef,
       visited: [],
       level: 0,
-      maxLevels: cipher.mazeDef.length,
-      startedAt: Date.now(),
-    };
-
-    if (
-      !cipher.mazeDef ||
-      !Array.isArray(cipher.mazeDef) ||
-      cipher.mazeDef.length === 0
-    ) {
-      session = {
-        sessionId: normalized,
-        mazeDef: [],
-        visited: [],
-        level: 0,
-        maxLevels: cipher.mazeDef.length,
-        startedAt: Date.now(),
-      };
-    }
-
-    session = {
-      sessionId: normalized,
-      mazeDef: cipher.mazeDef,
-      visited: [],
-      level: 0,
-      maxLevels: cipher.mazeDef.length,
+      maxLevels: mazeDef.length,
       startedAt: Date.now(),
     };
 
     saveSession(session);
-
-    // synchronní saveSession -> safe pro navigate
     navigate(`/hacker/session/${normalized}`);
   }
+
 
   const onButtonClick = (key: string) => {
     if (key === activeCipherKey) {

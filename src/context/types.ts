@@ -17,37 +17,37 @@ export type AuthContextType = {
   role: Role;
   login: (newRole: Role, username: string | null) => void;
   logout: () => void;
-  // cipher API (pro Hackera)
   isCipherSolved: (id: string) => boolean;
   ciphersList: CipherInfo[];
   markCipherSolved: (key: string) => void;
   markCipherUnsolved: (key: string) => void;
   getSolvedCount: () => number;
-  // utility
   resetAllCiphers: () => void;
 };
 
 export const CipherKeys = [
-   '533VZP1', '648ZUU2', '648ZUU2', '694LEX7', '623LAM1'
+   '533VZP1', '227PRT3' ,'648ZUU2', '694LEX7', '623BEL1', '789PYK6', '753ZFZ3'
 ]
-export type Matrix = string[]; // each element is e.g. "WIF" or "IFIW"
+export type Matrix = string[];
 
 export const MazeMatrix: Record<number, Matrix> = {
   0: ["WI", "WII", "FFWI", "IWFI", "WIIFI"],     
-  1: [],
-  2: ["FFWI", "IWFI", "WIFI", "IIFW"], 
-  3: ["FFWI", "IWFI", "WIFI", "IIFW"],
-  4: ["FIFIW", "FIWFI", "FWFFI", "IFIFW"], 
+  1: [], // nefunguje
+  2: ["FIFIW", "FIWFI", "FWFFI", "IFIFW"],
+  3: [], 
+  4: [],
+  5: ["FIFIW", "FIWFI", "FWFFI", "IFIFW"],
+  6: ["FFWI", "IWFI", "WIFI", "IIFW", "FIWFI", "FWFFI", "IFIFW"]
 };
 
 export const ROUTE_MAP: Record<string, string> = {
-  "533VZP1": "/hacker/target/alpha-01",
-  "227PRT3": "/hacker/target/echo-02",
-  "648ZUU2": "/hacker/target/omega-03",
-  "694LEX7": "/hacker/target/nyx-04",
-  "623BEL1": "/hacker/target/kv-05",
-  "789PYK6": "/hacker/target/tau-06",
-  "753ZFZ3": "/hacker/target/sigma-07",
+  "533VZP1": "/hacker/result/alpha-01",
+  "227PRT3": "/hacker/result/omega-03",
+  "648ZUU2": "/hacker/result/nyx-04",
+  "694LEX7": "/hacker/result/kv-05",
+  "623BEL1": "/hacker/result/tau-06",
+  "789PYK6": "/hacker/result/sigma-07",
+  "753ZFZ3": "/hacker/result/beta-08",
 };
 
 export const HACKER = [
