@@ -29,53 +29,73 @@ function randomLetters(length: number): string {
   return result;
 }
 
-function getLabel(type: NodeType): string {
-  // formát 32CON45422311 = dvě čísla + 3 písmena + 8 číslic
-  const prefix = randomDigits(2);
-  const middle = randomLetters(3);
-  const suffix = randomDigits(8);
+  function getLabel(type: NodeType): string {
+    // formát 32CON45422311 = dvě čísla + 3 písmena + 8 číslic
+    const prefix = randomDigits(2);
+    const middle = randomLetters(3);
+    const suffix = randomDigits(8);
 
-  let label = prefix + middle + suffix;
+    let label = prefix + middle + suffix;
 
-  switch (type) {
-    case 'WIN': {
-      // zajistit, že třetí znak je W
-      const chars = label.split('');
-      chars[6] = 'W';
-      label = chars.join('');
-      break;
-    }
+    switch (type) {
+      case 'WIN': {
+        const chars = label.split('');
 
-    case 'FAIL': {
-      // zajistit, že obsahuje tři 6, ale nemá W na třetí pozici
-      const failLabel = label.replace(/W/g, 'Z'); // jistota, že tam nebude W
-      const chars = failLabel.split('');
-      // náhodně vyber 3 pozice pro 6
-      const indices = new Set<number>();
-      while (indices.size < 3) {
-        const idx = Math.floor(Math.random() * chars.length);
-        if (idx !== 2) indices.add(idx); // nikdy na třetí pozici
-      }
-      for (const i of indices) chars[i] = '6';
-      label = chars.join('');
-      break;
-    }
-
-    case 'INACTIVE': {
-      // úplně náhodný, ale nesplňuje podmínky WIN ani FAIL
-      while (true) {
-        const candidate = prefix + randomLetters(3) + randomDigits(8);
-        if (candidate[2] !== 'W' && (candidate.match(/6/g)?.length ?? 0) < 3) {
-          label = candidate;
-          break;
+        // 1️⃣ nikdy neobsahovat tři šestky
+        while ((chars.join('').match(/6/g) || []).length === 3) {
+          // náhodně změnit jednu z nich
+          const i = chars.findIndex((c) => c === '6');
+          if (i !== -1) chars[i] = String.fromCharCode(65 + Math.floor(Math.random() * 26)); // náhodné písmeno
         }
-      }
-      break;
-    }
-  }
 
-  return label;
-}
+        // 2️⃣ zajistit, že šestý znak je W
+        if (chars.length > 6) chars[6] = 'W';
+
+        label = chars.join('');
+        break;
+      }
+
+      case 'FAIL': {
+        // odstranit W z šesté pozice
+        const chars = label.split('');
+        if (chars[6] === 'W') chars[6] = 'Z';
+
+        // vyčistit všechny existující 6, aby jich bylo přesně 3
+        for (let i = 0; i < chars.length; i++) {
+          if (chars[i] === '6') chars[i] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+        }
+
+        // vyber 3 náhodné pozice pro 6 (ne víc, ne míň)
+        const indices = new Set<number>();
+        while (indices.size < 3) {
+          const idx = Math.floor(Math.random() * chars.length);
+          if (idx !== 6) indices.add(idx); // nikdy na šesté pozici
+        }
+        for (const i of indices) chars[i] = '6';
+
+        label = chars.join('');
+        break;
+      }
+
+      case 'INACTIVE': {
+        // náhodně, ale bez tří šestek a bez W na šesté pozici
+        while (true) {
+          const candidate = prefix + randomLetters(3) + randomDigits(8);
+          const sixCount = (candidate.match(/6/g) || []).length;
+          if (candidate[6] !== 'W' && sixCount !== 3) {
+            label = candidate;
+            break;
+          }
+        }
+        break;
+      }
+
+      default:
+        break;
+    }
+
+    return label;
+  }
  
   pattern.split('').forEach((char, i) => {
     const type =

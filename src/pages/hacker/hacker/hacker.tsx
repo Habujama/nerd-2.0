@@ -1,16 +1,16 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/use-context.tsx';
-import type { CipherInfo } from '../../../context/types.ts';
+import type { CipherInfo, Session } from '../../../context/types.ts';
 import Wrapper from '../../../components/wrapper/wrapper.tsx';
 import Nav from '../../../components/nav/nav.tsx';
 import CipherInput from '../../../components/hacker-components/cipher-input.tsx';
-import SolvedCiphers from '../../../components/hacker-components/solved-ciphers.tsx';
+import SolvedCiphers from '../../../components/hacker-components/solved-ciphers/solved-ciphers.tsx';
 import { saveSession } from '../../../lib/hackSession';
 import './hacker.css';
+import { useMemo } from 'react';
+import getSolvedCiphersFromSessions from './get-solved-ciphers.tsx';
 
 export default function Hacker() {
-  const [activeCipherKey, setActiveCipherKey] = useState<string | null>(null);
   const { ciphersList } = useAuth();
   const navigate = useNavigate();
 
@@ -25,7 +25,7 @@ export default function Hacker() {
 
     const mazeDef = Array.isArray(cipher.mazeDef) ? cipher.mazeDef : [];
 
-    const session = {
+    const session: Session = {
       sessionId: normalized,
       mazeDef,
       visited: [],
@@ -39,18 +39,10 @@ export default function Hacker() {
     navigate(`/hacker/session/${normalized}`);
   }
 
-  const onButtonClick = (key: string) => {
-    if (key === activeCipherKey) {
-      setActiveCipherKey(null);
-    } else {
-      setActiveCipherKey(key);
-    }
-  };
-
-  const solvedCiphers: CipherInfo[] | false =
-    ciphersList.length > 0 && ciphersList.filter((c) => c.solved === true);
-
-  console.log(solvedCiphers, 'solved ciphers');
+  const solvedCiphers: CipherInfo[] | false = useMemo(() => {
+    const arr = getSolvedCiphersFromSessions();
+    return arr.length ? arr : false;
+  }, []);
 
   return (
     <Wrapper>
@@ -63,32 +55,36 @@ export default function Hacker() {
             ✅ 227PRT3: omega-03 - heslo bez minihry - chatovací program s
             brigádou
           </li>
-          <li>648ZUU2: nyx-04 - uzel 32CON45422311 - vypnutí elektřiny</li>
           <li>
-            694LEX7: kv-05 - bez zabezpečení - nahrávání duše, potom audio
+            ⏳ 648ZUU2: nyx-04 - uzel 32CON45422311 (??? bez hesla ???) -
+            vypnutí elektřiny
           </li>
-          <li>623BEL1: tau-06 - heslo + minihra - audio Belib</li>
           <li>
-            789PYK6: sigma-07 - labyrint + heslo + minihra - 3 uzly:
+            ⏳ 694LEX7: kv-05 - bez zabezpečení - nahrávání duše, potom audio
+          </li>
+          <li>
+            ⏳ 623BEL1: tau-06 - heslo (??? jaké ???) + minihra - audio Belib
+          </li>
+          <li>
+            ⏳ 789PYK6: sigma-07 - labyrint + heslo (??? jaké ???) + minihra - 3
+            uzly:
             <ul>
               <li>bez zabezpečení - audio Pykač</li>
-              <li>heslo bez minihry - audio Pykač 2</li>
-              <li>uzel č. 33CON33333333: heslo s minihrou - mazání Pykače</li>
+              <li>heslo (??? jaké ???) bez minihry - audio Pykač 2</li>
+              <li>
+                uzel č. 33CON33333333: heslo (Sal@moun66) s minihrou - mazání
+                Pykače
+              </li>
             </ul>
           </li>
           <li>
-            753ZFZ3 - beta-08 - nejsložitější možné zabezpečení - heslo k
+            ⏳ 753ZFZ3 - beta-08 - nejsložitější možné zabezpečení - heslo k
             Fehérově tabletu
           </li>
         </ol>
         <div className='hacker-page'>
           <CipherInput ciphersList={ciphersList} startSession={startSession} />
-
-          <SolvedCiphers
-            solvedCiphers={solvedCiphers}
-            activeCipherKey={activeCipherKey ?? null}
-            onButtonClick={onButtonClick}
-          />
+          <SolvedCiphers solvedCiphers={solvedCiphers} />
         </div>
       </div>
     </Wrapper>

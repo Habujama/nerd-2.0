@@ -43,7 +43,7 @@ export type Matrix = string[];
 
 export const MazeMatrix: Record<number, Matrix> = {
   0: ["WI", "WII", "FFWI", "IWFI", "WIIFI"],     
-  1: [], // nefunguje
+  1: [],
   2: ["FIFIW", "FIWFI", "FWFFI", "IFIFW"],
   3: [], 
   4: [],
@@ -66,8 +66,8 @@ export const NODE_KEY_MAP: Record<string, string> = {
   '227PRT3': 'omega-03',
   '648ZUU2': 'nyx-04',
   '694LEX7': 'kv-05',
-  '623BEL1':  'tau-06',
-  '789PYK6':'sigma-07', 
+  '623BEL1': 'tau-06',
+  '789PYK6': 'sigma-07', 
   '753ZFZ3': 'beta-08',
 };
 

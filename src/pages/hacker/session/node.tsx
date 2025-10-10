@@ -47,20 +47,22 @@ useEffect(() => {
             onClick={() => onNodeClick(n)}
             transform={`translate(${n.x},${n.y})`}
             className='node'
-        >
-        <circle
-            r={50}
-            ref={(el) => (circlesRef.current[i] = el)}
-            fill='none'
-            stroke='url(#myGradient)'
+          >
+            <circle
+              r={50}
+              ref={(el) => {
+                circlesRef.current[i] = el;
+              }}
+              fill='none'
+              stroke='url(#myGradient)'
             />
             <text x={0} y={6} textAnchor='middle' fontSize={10} fill='#66FFB2'>
-            {n.label}
+              {n.label}
             </text>
-        </g>
-    ))}
-     </svg>
-)
+          </g>
+        ))}
+      </svg>
+    );
 }
 
 export default Nodes

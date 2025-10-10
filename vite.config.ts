@@ -14,7 +14,7 @@ export default defineConfig({
         description: '',
         theme_color: '#000000',
         background_color: '#000000',
-        display: 'minimal-ui',
+        display: 'standalone',
         start_url: "./index.html",
         id: './index.html',
        icons: [
