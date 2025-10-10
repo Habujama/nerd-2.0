@@ -58,9 +58,10 @@ export default function Hacker() {
       <div className='medic-panel'>
         <h2>Happy hacking!</h2>
         <ol style={{ textAlign: 'left' }}>
-          <li>533VZP1: alpha-01 - labyrint - zpráva ve stanici Defensorů</li>
+          <li>✅ 533VZP1: alpha-01 - labyrint - zpráva ve stanici Defensorů</li>
           <li>
-            227PRT3: omega-03 - heslo bez minihry - chatovací program s brigádou
+            ✅ 227PRT3: omega-03 - heslo bez minihry - chatovací program s
+            brigádou
           </li>
           <li>648ZUU2: nyx-04 - uzel 32CON45422311 - vypnutí elektřiny</li>
           <li>

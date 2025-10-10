@@ -60,6 +60,7 @@ button {
   button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+    background-color: #1E2A26;
   }
   
   label {
@@ -80,7 +81,7 @@ input {
   display: block;
   width: 100%;
   padding: 0.5rem;
-  background: black;
+  background: #0A0F0D;
   color: white;
   border: 0.5px solid #00CC66;
   border-radius: 4px;
@@ -91,14 +92,15 @@ input {
 input:focus {
   border-color: #00CC66;
   outline: none;
-  box-shadow: 0 0 5px #00CC66;
+  box-shadow: 0 0 7px #00CC66;
+  background-color: #0A0F0D;
 }
 
 .input-error {
   display: block;
   width: 100%;
   padding: 0.5rem;
-  background: black;
+  background: #1E2A26;
   color: white;
   border-radius: 4px;
   box-sizing: border-box;
