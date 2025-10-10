@@ -50,6 +50,8 @@ button {
     background: #66FFB2;
     border: 1px solid #00CC66;
     color: #1E2A26;
+    transition: ease-in-out;
+    transition-duration: 600ms;
   }
   
   button:focus {
@@ -87,6 +89,8 @@ input {
   border-radius: 4px;
   box-sizing: border-box;
   margin-top: 0.25rem;
+  transition: ease-in-out;
+  transition-duration: 300ms;
 }
 
 input:focus {

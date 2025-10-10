@@ -1,15 +1,15 @@
-import React, { useEffect, useRef } from "react";
-import { gsap } from "gsap";
-import './connecting.css'
+import { type FC, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import './connecting.css';
 
-export const ConnectionLoader: React.FC = () => {
+export const ConnectionLoader: FC = () => {
   const circlesRef = useRef<Array<SVGCircleElement | null>>([]);
 
   useEffect(() => {
     const elems = circlesRef.current.filter(Boolean) as SVGCircleElement[];
     if (elems.length === 0) return;
 
-    const baseRs = elems.map((el) => Number(el.getAttribute("r")) || 20);
+    const baseRs = elems.map((el) => Number(el.getAttribute('r')) || 20);
 
     const tl = gsap.timeline({ repeat: -1, yoyo: true });
 
@@ -21,18 +21,18 @@ export const ConnectionLoader: React.FC = () => {
           attr: { r: newR },
           strokeOpacity: 0.4,
           duration: 0.8,
-          ease: "power1.inOut",
+          ease: 'power1.inOut',
         },
-        i * 0.25 // zpoždění pro každý kruh (stagger)
+        i * 0.25, // zpoždění pro každý kruh (stagger)
       ).to(
         el,
         {
           attr: { r: baseRs[i] },
           strokeOpacity: 1,
           duration: 0.8,
-          ease: "power1.inOut",
+          ease: 'power1.inOut',
         },
-        i * 0.25 + 0.8
+        i * 0.25 + 0.8,
       );
     });
 
@@ -42,20 +42,27 @@ export const ConnectionLoader: React.FC = () => {
   return (
     <div
       style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
         gap: 12,
       }}
     >
       <svg
-        width="220"
-        height="220"
-        viewBox="0 0 220 220"
-        xmlns="http://www.w3.org/2000/svg"
+        width='220'
+        height='220'
+        viewBox='0 0 220 220'
+        xmlns='http://www.w3.org/2000/svg'
       >
         {[0, 1, 2, 3].map((i) => {
-          const stroke = i === 0 ? "#00CC66" : i === 1 ? "#66FFB2" : i === 2 ? "#fff" : "#00CC66";
+          const stroke =
+            i === 0
+              ? '#00CC66'
+              : i === 1
+              ? '#66FFB2'
+              : i === 2
+              ? '#fff'
+              : '#00CC66';
           const r = 20 + i * 25;
           return (
             <circle
@@ -63,23 +70,23 @@ export const ConnectionLoader: React.FC = () => {
               ref={(el) => {
                 circlesRef.current[i] = el;
               }}
-              cx="120"
-              cy="120"
+              cx='120'
+              cy='120'
               r={r}
               stroke={stroke}
               strokeWidth={2.5}
-              fill="none"
+              fill='none'
             />
           );
         })}
       </svg>
 
       <p
-        className="animate-pulse"
+        className='animate-pulse'
         style={{
-          color: "white",
-          fontFamily: "monospace",
-          fontSize: "1.1rem",
+          color: 'white',
+          fontFamily: 'monospace',
+          fontSize: '1.1rem',
         }}
       >
         Přepojuji na bitchat...

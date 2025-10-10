@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Alpha01 from './alpha-01';
 import Beta08 from './beta-08';
 import Omega03 from './omega-03';
@@ -25,6 +25,7 @@ const RESULT_MAP: Record<string, React.FC<ResultTargetProps>> = {
 
 export default function Result() {
   const { name } = useParams<{ name: string }>();
+  const navigate = useNavigate();
 
   if (!name) return <p>Chybí parametr výsledku.</p>;
 
@@ -34,9 +35,14 @@ export default function Result() {
   const sessionId =
     Object.entries(NODE_KEY_MAP).find(([, page]) => page === name)?.[0] ?? '';
 
+  const handleBackClick = () => navigate('/hacker', { replace: true });
+
   return (
     <Wrapper>
       <Nav />
+      <button onClick={handleBackClick} className='results-button'>
+        Zpět na hlavní panel
+      </button>
       <div className='results-wrapper'>
         <Component sessionId={sessionId} />
       </div>

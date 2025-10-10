@@ -1,21 +1,22 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+
 import { nodesFromMatrix, type Node } from '../../../lib/mazeMatrix';
-import {
-  loadSession,
-  saveSession,
-  type Session,
-} from '../../../lib/hackSession';
-import { ROUTE_MAP } from '../../../context/types';
+import { loadSession, saveSession } from '../../../lib/hackSession';
+import { ROUTE_MAP, type Session } from '../../../context/types';
 import { useAuth } from '../../../context/use-context';
 import Wrapper from '../../../components/wrapper/wrapper';
+import './session.css';
+import Nodes from './node';
 
 export default function Session() {
   const { sessionId } = useParams<{ sessionId: string }>();
   const navigate = useNavigate();
   const [nodes, setNodes] = useState<Node[]>([]);
   const [session, setSession] = useState<Session | null>(null);
-  const { login } = useAuth();
+  const { login, markCipherSolved } = useAuth();
+
+  const handleNavigateBack = () => navigate('/hacker', { replace: true });
 
   // --- Načtení session z localStorage ---
   useEffect(() => {
@@ -41,7 +42,7 @@ export default function Session() {
     const pattern = session.mazeDef[level];
     if (!pattern) {
       console.warn('Missing pattern for level', level, 'in session', sessionId);
-      navigate('/hacker', { replace: true });
+      handleNavigateBack();
       return;
     }
 
@@ -84,10 +85,11 @@ export default function Session() {
           updated.completed = true;
           saveSession(updated);
           localStorage.setItem('last_unlocked', session.sessionId);
+          markCipherSolved(session.sessionId);
           const route = ROUTE_MAP[session.sessionId];
           return route
             ? navigate(route)
-            : alert('Error: mo portal available for this session.');
+            : alert('Error: no portal available for this session.');
         }
 
         // Další level
@@ -102,33 +104,10 @@ export default function Session() {
 
   return (
     <Wrapper>
-      <svg
-        viewBox='0 0 800 1000'
-        style={{ width: '100%', height: '100%', overflow: 'scroll' }}
-      >
-        {nodes.map((n) => (
-          <g
-            key={n.id}
-            transform={`translate(${n.x},${n.y})`}
-            style={{ cursor: 'pointer' }}
-            onClick={() => onNodeClick(n)}
-          >
-            <circle
-              r={40}
-              fill={
-                n.type === 'WIN'
-                  ? '#66FFB2'
-                  : n.type === 'FAIL'
-                  ? '#ff6b6b'
-                  : '#3a3a3a'
-              }
-            />
-            <text x={0} y={6} textAnchor='middle' fontSize={10} fill='#000'>
-              {n.label}
-            </text>
-          </g>
-        ))}
-      </svg>
+      <button onClick={handleNavigateBack} className='back-button'>
+        Zpět na hlavní panel
+      </button>
+      <Nodes nodes={nodes} onNodeClick={onNodeClick} />
     </Wrapper>
   );
 }

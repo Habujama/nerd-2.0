@@ -1,0 +1,29 @@
+.back-button {
+    position: absolute;
+    top: 3rem;
+    left: 3rem;
+    width: fit-content;
+    align-self: flex-start;
+}
+
+.node {
+    cursor: 'pointer' 
+}
+
+.node > circle {
+    fill: #1E2A26;
+}
+
+.node:hover > circle {
+    fill: #66FFB2;
+    transition: ease-in-out;
+    transition-duration: 1s;
+}
+
+.node > text {
+    fill: #66FFB2;
+}
+
+.node:hover > text {
+    fill: #1E2A26;
+}
