@@ -15,6 +15,7 @@ const CipherInput = ({ ciphersList, startSession }: CipherInputProps) => {
     register,
     handleSubmit,
     setError,
+    clearErrors,
     formState: { errors, isSubmitting, isDirty },
   } = useForm<FormValues>({
     defaultValues: { cipherKey: '' },
@@ -32,37 +33,44 @@ const CipherInput = ({ ciphersList, startSession }: CipherInputProps) => {
       });
       return;
     }
-
     startSession(normalized);
     return;
   };
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} className='hacker-form'>
-      <label>
-        Vlož klíč uzlu
-        <input
-          {...register('cipherKey', {
-            required: 'Vložení klíče uzlu je pro další postup nezbytné',
-          })}
-          aria-invalid={!!errors.cipherKey}
-          aria-describedby='cipherKey-error'
-          className={errors.cipherKey ? 'input-error' : 'input-clear'}
-        />
-        {errors.cipherKey && (
-          <span id='cipherKey-error' role='alert' className='error'>
-            {errors.cipherKey.message}
-          </span>
-        )}
-      </label>
-      <button
-        type='submit'
-        disabled={isSubmitting || (isDirty && !!errors.cipherKey)}
-      >
-        Potvrdit
-      </button>
-    </form>
+  console.log(
+    'Ciphers keys:',
+    ciphersList.map((c) => c.key),
   );
+
+return (
+  <form onSubmit={handleSubmit(onSubmit)} className='hacker-form'>
+    <label>
+      Vlož klíč uzlu
+      <input
+        type='password'
+        {...register('cipherKey', {
+          required: 'Vložení klíče uzlu je pro další postup nezbytné',
+        })}
+        aria-invalid={!!errors.cipherKey}
+        aria-describedby='cipher-error'
+        onBlur={() => clearErrors()}
+        placeholder='Zadej klíč uzlu'
+        className={errors.cipherKey ? 'input-error' : 'input-clear'}
+      />
+      {errors.cipherKey && (
+        <span id='cipherKey-error' role='alert' className='error'>
+          {errors.cipherKey.message}
+        </span>
+      )}
+    </label>
+    <button
+      type='submit'
+      disabled={isSubmitting || (isDirty && !!errors.cipherKey)}
+    >
+      Potvrdit
+    </button>
+  </form>
+);
 };
 
 export default CipherInput;
