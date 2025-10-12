@@ -6,24 +6,12 @@
     align-self: flex-start;
 }
 
-.node {
-    cursor: 'pointer' 
-}
-
-.node > circle {
-    fill: #1E2A26;
-}
-
-.node:hover > circle {
-    fill: #66FFB2;
-    transition: ease-in-out;
-    transition-duration: 1s;
-}
-
-.node > text {
-    fill: #66FFB2;
-}
-
-.node:hover > text {
-    fill: #1E2A26;
+.error {
+    position: fixed;
+    top: 25%;
+    padding: 20px;
+    border-radius: 10px;
+    border:  #FF3333 3px solid;
+    background-color: #1E2A26;
+    color: #FF3333;
 }

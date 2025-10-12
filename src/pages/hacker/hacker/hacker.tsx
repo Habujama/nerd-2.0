@@ -14,8 +14,6 @@ export default function Hacker() {
   const { ciphersList } = useAuth();
   const navigate = useNavigate();
 
-  console.log('ciphersList in hackerrr:', ciphersList);
-
   function startSession(id: string) {
     const normalized = id.trim().toUpperCase();
     const cipher = ciphersList.find((c) => c.key === normalized);

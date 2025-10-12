@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 
-import { nodesFromMatrix, type Node } from '../../../lib/mazeMatrix';
+import {
+  nodesFromMatrix,
+  type Node,
+  type NodeType,
+} from '../../../lib/mazeMatrix';
 import { loadSession, saveSession } from '../../../lib/hackSession';
 import { ROUTE_MAP, type Session } from '../../../context/types';
 import { useAuth } from '../../../context/use-context';
@@ -14,7 +18,12 @@ export default function Session() {
   const navigate = useNavigate();
   const [nodes, setNodes] = useState<Node[]>([]);
   const [session, setSession] = useState<Session | null>(null);
-  const { login, markCipherSolved } = useAuth();
+  const [feedbackNode, setFeedbackNode] = useState<{
+    id: string;
+    type: NodeType;
+  } | null>(null);
+  const [breachFound, setBreachFound] = useState<boolean>(false);
+  const { markCipherSolved } = useAuth();
 
   const handleNavigateBack = () => navigate('/hacker', { replace: true });
 
@@ -54,24 +63,26 @@ export default function Session() {
   function onNodeClick(node: Node) {
     if (!session) return;
 
-    switch (node.type) {
-      case 'INACTIVE':
-        // TODO: implementovat vizuální response
-        return;
+    setFeedbackNode({ id: node.id, type: node.type });
 
+    switch (node.type) {
       case 'FAIL': {
-        // TODO: implementovat vizuální response
-        const reset: Session = { ...session, level: 0, visited: [] };
-        saveSession(reset);
-        setSession(null);
-        setNodes([]);
-        login(null, null);
-        navigate('/hacker', { replace: true });
+        setBreachFound(true);
+        setTimeout(() => {
+          const reset: Session = { ...session, level: 0, visited: [] };
+          saveSession(reset);
+          setBreachFound(false);
+          navigate('/hacker', { replace: true });
+        }, 5000);
+        return;
+      }
+
+      case 'INACTIVE': {
+        setTimeout(() => setFeedbackNode(null), 10000);
         return;
       }
 
       case 'WIN': {
-        // TODO: implementovat vizuální response
         const newLevel = (session.level ?? 0) + 1;
         const maxLevels = session.mazeDef!.length;
         const updated = {
@@ -80,7 +91,6 @@ export default function Session() {
           visited: [...(session.visited || []), node.id],
         };
 
-        // Výhra celé session
         if (newLevel >= maxLevels) {
           updated.completed = true;
           saveSession(updated);
@@ -92,11 +102,14 @@ export default function Session() {
             : alert('Error: no portal available for this session.');
         }
 
-        // Další level
-        saveSession(updated);
-        setSession(updated);
-        const nextPattern = session.mazeDef![newLevel];
-        setNodes(nodesFromMatrix(session.sessionId, nextPattern, newLevel));
+        // animace mezi úrovněmi
+        setTimeout(() => {
+          saveSession(updated);
+          setSession(updated);
+          const nextPattern = session.mazeDef![newLevel];
+          setNodes(nodesFromMatrix(session.sessionId, nextPattern, newLevel));
+          setFeedbackNode(null);
+        }, 2000);
         return;
       }
     }
@@ -107,7 +120,18 @@ export default function Session() {
       <button onClick={handleNavigateBack} className='back-button'>
         Zpět na hlavní panel
       </button>
-      <Nodes nodes={nodes} onNodeClick={onNodeClick} />
+      {breachFound && (
+        <div className='error'>
+          <h3>
+            ⚠️ Zaznamenán neautorizovaný pokus o vniknutí. Přerušuji spojení.
+          </h3>
+        </div>
+      )}
+      <Nodes
+        nodes={nodes}
+        onNodeClick={onNodeClick}
+        feedbackNode={feedbackNode}
+      />
     </Wrapper>
   );
 }

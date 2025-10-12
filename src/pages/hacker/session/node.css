@@ -1,0 +1,19 @@
+.node {
+    width: '100%';
+    height: '100%';
+    overflow: 'scroll';
+    margin-top: '5rem';
+}
+
+.node:hover > circle {
+    transition: ease-in-out;
+    transition-duration: 1s;
+}
+
+.node > text {
+    fill: #66FFB2;
+}
+
+.node:hover > text {
+    fill: #1E2A26;
+}

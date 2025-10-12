@@ -37,11 +37,6 @@ const CipherInput = ({ ciphersList, startSession }: CipherInputProps) => {
     return;
   };
 
-  console.log(
-    'Ciphers keys:',
-    ciphersList.map((c) => c.key),
-  );
-
 return (
   <form onSubmit={handleSubmit(onSubmit)} className='hacker-form'>
     <label>
