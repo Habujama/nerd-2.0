@@ -34,6 +34,7 @@ export default function Session() {
   useEffect(() => {
     if (!sessionId) return;
     const session = loadSession(sessionId);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
     if (!session) {
       navigate('/hacker', { replace: true });
