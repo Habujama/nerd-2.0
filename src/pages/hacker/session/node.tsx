@@ -32,7 +32,12 @@ useEffect(() => {
     return (
       <svg
         viewBox='0 0 800 1000'
-        style={{ width: '100%', height: '100%', overflow: 'scroll' }}
+        style={{
+          width: '100%',
+          height: '100%',
+          overflow: 'scroll',
+          marginTop: '5rem',
+        }}
       >
         <defs>
           <linearGradient id='myGradient'>

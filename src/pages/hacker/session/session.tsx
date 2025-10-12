@@ -21,7 +21,7 @@ export default function Session() {
   // --- Načtení session z localStorage ---
   useEffect(() => {
     if (!sessionId) return;
-
+    // TODO: scrollTop on load
     const session = loadSession(sessionId);
 
     if (!session) {
