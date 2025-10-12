@@ -11,7 +11,17 @@
     top: 25%;
     padding: 20px;
     border-radius: 10px;
-    border:  #FF3333 3px solid;
+    border:  #FF3333 2px solid;
     background-color: #1E2A26;
     color: #FF3333;
+}
+
+.success {
+    position: fixed;
+    top: 25%;
+    padding: 20px;
+    border-radius: 10px;
+    border:  #66FFB2 2px solid;
+    background-color: #1E2A26;
+    color: #66FFB2;
 }
