@@ -58,7 +58,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setRole(parsed.role ?? null);
       setUsername(parsed.username ?? null);
       const loadedCiphersFromStorage = loadCiphersFromStorage();
-      console.log(loadedCiphersFromStorage, 'looooa');
       setCiphersList(loadedCiphersFromStorage);
     } catch {
       console.error('error loading state from localStorage');

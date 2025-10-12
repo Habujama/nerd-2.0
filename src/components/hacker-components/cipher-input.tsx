@@ -47,7 +47,7 @@ return (
     <label>
       Vlož klíč uzlu
       <input
-        type='password'
+        type='text'
         {...register('cipherKey', {
           required: 'Vložení klíče uzlu je pro další postup nezbytné',
         })}
