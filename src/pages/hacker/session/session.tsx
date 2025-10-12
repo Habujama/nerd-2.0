@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-
-import { nodesFromMatrix, type Node } from '../../../lib/mazeMatrix';
+import {
+  nodesFromMatrix,
+  type Node,
+  type NodeType,
+} from '../../../lib/mazeMatrix';
 import { loadSession, saveSession } from '../../../lib/hackSession';
 import { ROUTE_MAP, type Session } from '../../../context/types';
 import { useAuth } from '../../../context/use-context';
@@ -12,20 +15,27 @@ import Nodes from './node';
 export default function Session() {
   const { sessionId } = useParams<{ sessionId: string }>();
   const navigate = useNavigate();
-  const [nodes, setNodes] = useState<Node[]>([]);
+  const [allNodes, setAllNodes] = useState<Node[][]>([]);
   const [session, setSession] = useState<Session | null>(null);
-  const { login, markCipherSolved } = useAuth();
+  const [feedbackNode, setFeedbackNode] = useState<{
+    id: string;
+    type: NodeType;
+  } | null>(null);
+  const [breachFound, setBreachFound] = useState<boolean>(false);
+  const [finished, setFinished] = useState<boolean>(false);
+  const { markCipherSolved } = useAuth();
 
-  const handleNavigateBack = () => navigate('/hacker', { replace: true });
+  const handleNavigateBack = () => {
+    setAllNodes([]);
+    navigate('/hacker', { replace: true });
+  };
 
   // --- Načtení session z localStorage ---
   useEffect(() => {
     if (!sessionId) return;
-
     const session = loadSession(sessionId);
 
     if (!session) {
-      console.warn('Session not found for id:', sessionId);
       navigate('/hacker', { replace: true });
       return;
     }
@@ -41,38 +51,47 @@ export default function Session() {
     const level = session.level ?? 0;
     const pattern = session.mazeDef[level];
     if (!pattern) {
-      console.warn('Missing pattern for level', level, 'in session', sessionId);
       handleNavigateBack();
       return;
     }
 
     setSession(session);
-    setNodes(nodesFromMatrix(sessionId, pattern, level));
+    // Vygenerujeme všechny úrovně až do aktuální
+    const newAllNodes = session.mazeDef
+      .slice(0, level + 1)
+      .map((pattern, idx) => nodesFromMatrix(sessionId, pattern, idx));
+    setAllNodes(newAllNodes);
   }, [sessionId, navigate]);
 
   // --- Kliknutí na uzel ---
-  function onNodeClick(node: Node) {
+  function onNodeClick(node: Node, nodeLevel: number) {
     if (!session) return;
 
-    switch (node.type) {
-      case 'INACTIVE':
-        // TODO: implementovat vizuální response
-        return;
+    // Ignorujeme kliknutí na starší úrovně
+    const currentLevel = session.level ?? 0;
+    if (nodeLevel !== currentLevel) return;
 
+    setFeedbackNode({ id: node.id, type: node.type });
+
+    switch (node.type) {
       case 'FAIL': {
-        // TODO: implementovat vizuální response
-        const reset: Session = { ...session, level: 0, visited: [] };
-        saveSession(reset);
-        setSession(null);
-        setNodes([]);
-        login(null, null);
-        navigate('/hacker', { replace: true });
+        setBreachFound(true);
+        setTimeout(() => {
+          const reset: Session = { ...session, level: 0, visited: [] };
+          saveSession(reset);
+          setBreachFound(false);
+          navigate('/hacker', { replace: true });
+        }, 5000);
+        return;
+      }
+
+      case 'INACTIVE': {
+        setTimeout(() => setFeedbackNode(null), 10000);
         return;
       }
 
       case 'WIN': {
-        // TODO: implementovat vizuální response
-        const newLevel = (session.level ?? 0) + 1;
+        const newLevel = currentLevel + 1;
         const maxLevels = session.mazeDef!.length;
         const updated = {
           ...session,
@@ -80,23 +99,33 @@ export default function Session() {
           visited: [...(session.visited || []), node.id],
         };
 
-        // Výhra celé session
         if (newLevel >= maxLevels) {
-          updated.completed = true;
-          saveSession(updated);
-          localStorage.setItem('last_unlocked', session.sessionId);
-          markCipherSolved(session.sessionId);
-          const route = ROUTE_MAP[session.sessionId];
-          return route
-            ? navigate(route)
-            : alert('Error: no portal available for this session.');
+          setFinished(true);
+          setTimeout(() => {
+            updated.completed = true;
+            saveSession(updated);
+            localStorage.setItem('last_unlocked', session.sessionId);
+            markCipherSolved(session.sessionId);
+            const route = ROUTE_MAP[session.sessionId];
+            setFinished(false);
+            return route
+              ? navigate(route)
+              : alert('Error: no portal available for this session.');
+          }, 3000);
+          return;
         }
 
-        // Další level
-        saveSession(updated);
-        setSession(updated);
-        const nextPattern = session.mazeDef![newLevel];
-        setNodes(nodesFromMatrix(session.sessionId, nextPattern, newLevel));
+        // Přidání nové úrovně do pole allNodes
+        setTimeout(() => {
+          saveSession(updated);
+          setSession(updated);
+          const nextPattern = session.mazeDef![newLevel];
+          setAllNodes((prev) => [
+            ...prev,
+            nodesFromMatrix(session.sessionId, nextPattern, newLevel),
+          ]);
+          setFeedbackNode(null);
+        }, 500);
         return;
       }
     }
@@ -107,7 +136,23 @@ export default function Session() {
       <button onClick={handleNavigateBack} className='back-button'>
         Zpět na hlavní panel
       </button>
-      <Nodes nodes={nodes} onNodeClick={onNodeClick} />
+      {finished && (
+        <div className='success'>
+          <h3>⏳ Odemykám přístup k uzlu...</h3>
+        </div>
+      )}
+      {breachFound && (
+        <div className='error'>
+          <h3>
+            ⚠️ Zaznamenán neautorizovaný pokus o vniknutí. Přerušuji spojení...
+          </h3>
+        </div>
+      )}
+      <Nodes
+        allNodes={allNodes}
+        onNodeClick={onNodeClick}
+        feedbackNode={feedbackNode}
+      />
     </Wrapper>
   );
 }

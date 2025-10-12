@@ -8,11 +8,13 @@ interface MedicValuesProps {
 }
 
 const MedicValues = ({ title, minCount, maxCount}: MedicValuesProps) => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(minCount);
   useEffect(() => {
     const interval = setInterval(() => {
-      setCount(() => Math.floor(Math.random() * (maxCount - minCount + 1) + minCount));
-    }, 1000);
+      setCount(() =>
+        Math.floor(Math.random() * (maxCount - minCount + 1) + minCount),
+      );
+    }, 10000);
 
     return () => clearInterval(interval);
   }, [maxCount, minCount]);

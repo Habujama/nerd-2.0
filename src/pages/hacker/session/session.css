@@ -6,24 +6,22 @@
     align-self: flex-start;
 }
 
-.node {
-    cursor: 'pointer' 
+.error {
+    position: fixed;
+    top: 25%;
+    padding: 20px;
+    border-radius: 10px;
+    border:  #FF3333 2px solid;
+    background-color: #1E2A26;
+    color: #FF3333;
 }
 
-.node > circle {
-    fill: #1E2A26;
-}
-
-.node:hover > circle {
-    fill: #66FFB2;
-    transition: ease-in-out;
-    transition-duration: 1s;
-}
-
-.node > text {
-    fill: #66FFB2;
-}
-
-.node:hover > text {
-    fill: #1E2A26;
+.success {
+    position: fixed;
+    top: 25%;
+    padding: 20px;
+    border-radius: 10px;
+    border:  #66FFB2 2px solid;
+    background-color: #1E2A26;
+    color: #66FFB2;
 }

@@ -53,10 +53,10 @@ const MedicPage = () => {
       {isReadingAlive && (
         <>
           <div className='medic-values-grid'>
-            <MedicValues title={'HR'} minCount={40} maxCount={200} />
-            <MedicValues title={'Pulse'} minCount={40} maxCount={200} />
-            <MedicValues title={'Spo2'} minCount={12} maxCount={30} />
-            <MedicValues title={'RR'} minCount={12} maxCount={30} />
+            <MedicValues title={'IBP'} minCount={65} maxCount={130} />
+            <MedicValues title={'HR'} minCount={60} maxCount={110} />
+            <MedicValues title={'Spo2'} minCount={92} maxCount={98} />
+            <MedicValues title={'RR'} minCount={12} maxCount={20} />
           </div>
           <Ekg />
         </>
@@ -64,8 +64,8 @@ const MedicPage = () => {
       {isReadingDead && (
         <>
           <div className='medic-values-grid'>
+            <MedicValues title={'IBP'} minCount={0} maxCount={0} />
             <MedicValues title={'HR'} minCount={0} maxCount={0} />
-            <MedicValues title={'Pulse'} minCount={0} maxCount={0} />
             <MedicValues title={'Spo2'} minCount={0} maxCount={0} />
             <MedicValues title={'RR'} minCount={0} maxCount={0} />
           </div>
