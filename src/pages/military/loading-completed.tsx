@@ -1,13 +1,14 @@
+import type { Dispatch, SetStateAction } from 'react';
 import './military.css';
 
 interface LoadingCompletedProps {
-  setIsExtracting: (isLoading: boolean) => void;
-  resetExtraction: () => void;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  resetLoading: () => void;
 }
 
 const LoadingCompleted = ({
-  setIsExtracting,
-  resetExtraction,
+  setIsLoading,
+  resetLoading,
 }: LoadingCompletedProps) => (
   <>
     <h2>Nahrávání dokončeno!</h2>
@@ -19,8 +20,8 @@ const LoadingCompleted = ({
     </p>
     <button
       onClick={() => {
-        resetExtraction();
-        setIsExtracting(false);
+        resetLoading();
+        setIsLoading(false);
       }}
       style={{ width: '400px' }}
     >

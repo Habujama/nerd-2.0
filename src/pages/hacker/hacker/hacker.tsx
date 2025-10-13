@@ -57,13 +57,13 @@ export default function Hacker() {
           </li>
           <li>✅ 648ZUU2: nyx-04 - uzel 32CON45422311 - vypnutí elektřiny</li>
           <li>
-            🟢 694LEX7: kv-05 - bez zabezpečení - nahrávání duše, potom audio
+            ✅ 694LEX7: kv-05 - bez zabezpečení - nahrávání duše, potom audio
           </li>
           <li>
-            ⏳ 623BEL1: tau-06 - heslo (??? jaké ???) + minihra - audio Belib
+            ✅ 623BEL1: tau-06 - heslo (??? jaké ???) + minihra - audio Belib
           </li>
           <li>
-            ⏳ 789PYK6: sigma-07 - labyrint + heslo (??? jaké ???) + minihra - 3
+            789PYK6: sigma-07 - labyrint + heslo (??? jaké ???) + minihra - 3
             uzly:
             <ul>
               <li>bez zabezpečení - audio Pykač</li>

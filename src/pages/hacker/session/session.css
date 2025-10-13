@@ -6,7 +6,7 @@
     align-self: flex-start;
 }
 
-.error {
+.session-error {
     position: fixed;
     top: 25%;
     padding: 20px;
@@ -16,7 +16,7 @@
     color: #FF3333;
 }
 
-.success {
+.session-success {
     position: fixed;
     top: 25%;
     padding: 20px;

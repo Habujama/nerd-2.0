@@ -12,18 +12,33 @@ const Nyx04 = () => {
         <button
           onClick={() => setShowDetails('electricity')}
           className='choice-button'
+          style={
+            showDetails === 'electricity'
+              ? { backgroundColor: '#66FFB2', color: '#0A0F0D' }
+              : undefined
+          }
         >
           32CON45422311
         </button>
         <button
           onClick={() => setShowDetails('canteen')}
           className='choice-button'
+          style={
+            showDetails === 'canteen'
+              ? { backgroundColor: '#66FFB2', color: '#0A0F0D' }
+              : undefined
+          }
         >
           34CON45488311
         </button>
         <button
           onClick={() => setShowDetails('delivery')}
           className='choice-button'
+          style={
+            showDetails === 'delivery'
+              ? { backgroundColor: '#66FFB2', color: '#0A0F0D' }
+              : undefined
+          }
         >
           39CON45489311
         </button>

@@ -138,12 +138,12 @@ export default function Session() {
         Zpět na hlavní panel
       </button>
       {finished && (
-        <div className='success'>
+        <div className='session-success'>
           <h3>⏳ Odemykám přístup k uzlu...</h3>
         </div>
       )}
       {breachFound && (
-        <div className='error'>
+        <div className='session-error'>
           <h3>
             ⚠️ Zaznamenán neautorizovaný pokus o vniknutí. Přerušuji spojení...
           </h3>

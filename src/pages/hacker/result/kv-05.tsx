@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { Howl } from 'howler';
 import Belak2 from '../../../assets/audio/Belak2.mp3';
 import ExtractionInProgress from './loading-mind/extraction-in-progress.tsx';
 import ExtractionCompleted from './loading-mind/extraction-completed.tsx';
@@ -7,6 +6,7 @@ import ExtractionReady from './loading-mind/extraction-ready.tsx';
 import ExtractionIntercepted from './loading-mind/extraction-intercepted.tsx';
 import './loading-mind/extraction.css';
 import LockedFile from './locked-file/locked-file.tsx';
+import AudioPlayer from '../../../components/audio-player/audio-player.tsx';
 
 interface Kv05Props {
   sessionId: string;
@@ -26,30 +26,6 @@ const Kv05 = ({ sessionId }: Kv05Props) => {
     null,
   );
   const prevStatusRef = useRef(loadingStatus);
-
-  const [isPlaying, setIsPlaying] = useState(false);
-  const soundRef = useRef<Howl | null>(null);
-
-  if (!soundRef.current) {
-    soundRef.current = new Howl({
-      src: [Belak2],
-      volume: 1,
-      onend: () => setIsPlaying(false),
-    });
-  }
-
-  const togglePlayback = () => {
-    const sound = soundRef.current;
-    if (!sound) return;
-
-    if (sound.playing()) {
-      sound.pause();
-      setIsPlaying(false);
-    } else {
-      sound.play();
-      setIsPlaying(true);
-    }
-  };
 
   // will play sound on loadingStatus change to true
   useEffect(() => {
@@ -170,9 +146,7 @@ const Kv05 = ({ sessionId }: Kv05Props) => {
           password='NovyDen'
           isPwdRecovarable={false}
         >
-          <button onClick={togglePlayback} style={{ width: '400px' }}>
-            {isPlaying ? '⏸ Zastavit záznam' : '▶ Přehrát záznam'}
-          </button>
+          <AudioPlayer audioFile={Belak2} />
         </LockedFile>
       )}
     </div>
