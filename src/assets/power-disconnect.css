@@ -1,0 +1,35 @@
+.power-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin: auto;
+}
+
+.power-btn {
+  background: #C50000;
+  color: #fff;
+  border: #FF4D4D 1px solid;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: monospace;
+  font-size: 1.1rem;
+  font-weight: bold;
+  box-shadow: 0 0 20px rgba(129, 2, 2, 0.5);
+  transition: all 0.3s ease;
+}
+
+.power-btn:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(129, 2, 2, 0.3);
+  background: rgba(129, 2, 2, 1);
+}
+
+.power-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: rgba(139, 2, 2, 1);
+  border: none;
+  box-shadow: none;
+}

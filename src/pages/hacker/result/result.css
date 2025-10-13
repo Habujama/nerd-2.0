@@ -1,5 +1,34 @@
-.results-button {
-   width: fit-content;
+.back-button {
+    position: fixed;
+    bottom: 3rem;
+    left: 3rem;
+    width: fit-content;
     align-self: flex-start;
-    margin: 8rem 0 0 3rem;
+}
+
+.results-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5rem 3rem;
+}
+
+.nyx-buttons {
+    display: flex;
+    gap: 3rem;
+}
+
+.choice-button {
+    border-radius: 100%;
+    padding: 4rem 1.5rem;
+}
+
+.list-no-bullets {
+    list-style: none;
+    text-align: justify;
+}
+
+.text-block {
+    margin: 3rem;
+    padding: 2rem 3rem;
 }

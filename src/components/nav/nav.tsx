@@ -6,7 +6,11 @@ const Nav = () => {
     const { login } = useAuth();
     return (
       <div className='nav'>
-        <button className='nav-button' onClick={() => login(null, null)}>
+        <button
+          className='nav-button'
+          style={{ width: '250px' }}
+          onClick={() => login(null, null)}
+        >
           {' '}
           <Logout /> Odhlásit
         </button>

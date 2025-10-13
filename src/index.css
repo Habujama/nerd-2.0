@@ -36,8 +36,8 @@ h1 {
 
 button {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  width: 100%;
-  padding: 0.75rem;
+  width: fit-content;
+  padding: 0.75rem 3.5rem;
   border: 1px solid #66FFB2;
   border-radius: 0%;
   color: white;

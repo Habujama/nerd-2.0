@@ -55,12 +55,9 @@ export default function Hacker() {
             ✅ 227PRT3: omega-03 - heslo bez minihry - chatovací program s
             brigádou
           </li>
+          <li>✅ 648ZUU2: nyx-04 - uzel 32CON45422311 - vypnutí elektřiny</li>
           <li>
-            ⏳ 648ZUU2: nyx-04 - uzel 32CON45422311 (??? bez hesla ???) -
-            vypnutí elektřiny
-          </li>
-          <li>
-            ⏳ 694LEX7: kv-05 - bez zabezpečení - nahrávání duše, potom audio
+            🟢 694LEX7: kv-05 - bez zabezpečení - nahrávání duše, potom audio
           </li>
           <li>
             ⏳ 623BEL1: tau-06 - heslo (??? jaké ???) + minihra - audio Belib

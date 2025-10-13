@@ -61,6 +61,7 @@ return (
     <button
       type='submit'
       disabled={isSubmitting || (isDirty && !!errors.cipherKey)}
+      style={{ margin: 'auto' }}
     >
       Potvrdit
     </button>

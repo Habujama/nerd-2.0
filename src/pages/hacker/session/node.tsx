@@ -82,9 +82,7 @@ const Nodes = ({ allNodes, onNodeClick, feedbackNode }: NodesProps) => {
     if (!svg) return;
 
     const lines = svg.querySelectorAll('line');
-    console.log(lines, 'lines');
     const newLines = Array.from(lines).filter((line) => !line.dataset.animated);
-    console.log(newLines, 'neeeew');
     if (!newLines || newLines.length === 0) return;
     newLines.forEach((line) => {
       const length = Math.hypot(
