@@ -117,6 +117,10 @@ export const MEDIC = [
     username: 'michelle',
     password: 'ezra_vstal',
   },
+    {
+    username: 'diana',
+    password: 'do_edenu',
+  },
 ];
 
 export const MILITARY = [
