@@ -1,14 +1,17 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import EyeOpenIcon from '../../../../assets/eye-svgrepo-com.tsx';
 import EyeClosedIcon from '../../../../assets/eye-slash-svgrepo-com.tsx';
 import MiniGame from '../../../../components/minigame/minigame';
 import './locked-file.css';
+
 interface LockedFileProps {
   password: string;
   sessionId: string;
   title?: string;
   isPwdRecovarable?: boolean;
   children: React.ReactNode;
+  unlocked?: boolean; // <- volitelné
+  onUnlock?: () => void; // <- volitelné
 }
 
 const LockedFile = ({
@@ -17,41 +20,64 @@ const LockedFile = ({
   title,
   isPwdRecovarable = true,
   children,
+  unlocked: unlockedProp, // controlled režim
+  onUnlock,
 }: LockedFileProps) => {
   const [input, setInput] = useState('');
-  const [unlocked, setUnlocked] = useState(false);
   const [gameWon, setGameWon] = useState(false);
   const [showGame, setShowGame] = useState(false);
   const [error, setError] = useState(false);
   const [showInput, setShowInput] = useState<boolean>(false);
 
-  const handleShowPassword = () => {
-    setShowInput(!showInput);
-  };
+  // Vnitřní stav odemčení (pro uncontrolled režim)
+  const [internalUnlocked, setInternalUnlocked] = useState(false);
+
+  // Pokud komponenta dostane prop `unlocked`, přejde do řízeného režimu
+  const isControlled = unlockedProp !== undefined;
+  const unlocked = isControlled ? unlockedProp! : internalUnlocked;
+
+  // Po každém odemčení smaž vstup
+  useEffect(() => {
+    if (unlocked) setInput('');
+  }, [unlocked]);
+
+  const handleShowPassword = () => setShowInput(!showInput);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setGameWon(false);
     setShowGame(false);
+
     if (input.toLowerCase() === password.toLowerCase()) {
-      setUnlocked(true);
+      if (isControlled) {
+        onUnlock?.();
+      } else {
+        setInternalUnlocked(true);
+      }
+      setInput('');
+      setError(false);
     } else {
       setError(true);
     }
   };
 
-  const handleGameWon = () => (setGameWon(true), setShowGame(false));
+  const handleGameWon = () => {
+    setGameWon(true);
+    setShowGame(false);
+    if (isControlled) {
+      onUnlock?.();
+    } else {
+      setInternalUnlocked(true);
+    }
+    setInput('');
+  };
 
-  const handleNavigateBack = () => (setGameWon(false), setShowGame(false));
-
-  const handleResetPwd = () => (setGameWon(false), setShowGame(true));
-
-  if (unlocked) return <>{children}</>;
+  if (unlocked) return <div>{children}</div>;
 
   return (
     <div className='locked-wrapper'>
-      <h3>{title ? title : 'Uzamčený soubor'}</h3>
-      {showGame && !unlocked && <h3>Obnovení hesla:</h3>}
+      <h3>{title ?? 'Uzamčený soubor'}</h3>
+
       {!showGame && (
         <>
           {gameWon && (
@@ -59,7 +85,6 @@ const LockedFile = ({
               Heslo obnoveno: <strong>{password}</strong>
             </p>
           )}
-
           <form onSubmit={handleSubmit}>
             <label style={{ textAlign: 'left', marginBottom: '2rem' }}>
               Heslo:
@@ -68,9 +93,7 @@ const LockedFile = ({
                   id='password'
                   type={showInput ? 'text' : 'password'}
                   name='password'
-                  aria-label='password'
                   placeholder='Zadej heslo...'
-                  aria-describedby='node-password-error'
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onBlur={() => setError(false)}
@@ -95,7 +118,10 @@ const LockedFile = ({
             </button>
           </form>
           {isPwdRecovarable && (
-            <button onClick={handleResetPwd} className='pwd-link-button'>
+            <button
+              onClick={() => setShowGame(true)}
+              className='pwd-link-button'
+            >
               Zapomněl jsem heslo
             </button>
           )}
@@ -105,7 +131,10 @@ const LockedFile = ({
       {showGame && (
         <>
           <MiniGame sessionId={sessionId} setGameWon={handleGameWon} />
-          <button onClick={handleNavigateBack} className='pwd-link-button'>
+          <button
+            onClick={() => setShowGame(false)}
+            className='pwd-link-button'
+          >
             Zpět
           </button>
         </>
@@ -114,4 +143,4 @@ const LockedFile = ({
   );
 };
 
-export default LockedFile
+export default LockedFile;

@@ -6,6 +6,13 @@
     width: 50%;
 }
 
+@media screen and (max-width: 400px) {
+  .locked-wrapper {
+    gap: 0.5rem;
+    width: 100%;
+  }
+}
+
 .pwd-link-button {
     text-decoration: underline;
     border: none;
@@ -65,3 +72,4 @@
   transform: scale(1.1);
   color: #00CC66;
 }
+

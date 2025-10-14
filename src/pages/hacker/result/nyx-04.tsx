@@ -10,17 +10,6 @@ const Nyx04 = () => {
       <h4>Správa zabezpečení tábora</h4>
       <div className='nyx-buttons'>
         <button
-          onClick={() => setShowDetails('electricity')}
-          className='choice-button'
-          style={
-            showDetails === 'electricity'
-              ? { backgroundColor: '#66FFB2', color: '#0A0F0D' }
-              : undefined
-          }
-        >
-          32CON45422311
-        </button>
-        <button
           onClick={() => setShowDetails('canteen')}
           className='choice-button'
           style={
@@ -41,6 +30,17 @@ const Nyx04 = () => {
           }
         >
           39CON45489311
+        </button>
+        <button
+          onClick={() => setShowDetails('electricity')}
+          className='choice-button'
+          style={
+            showDetails === 'electricity'
+              ? { backgroundColor: '#66FFB2', color: '#0A0F0D' }
+              : undefined
+          }
+        >
+          32CON45422311
         </button>
       </div>
       {showDetails === 'electricity' && <PowerDisconnect />}

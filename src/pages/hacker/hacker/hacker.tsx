@@ -48,37 +48,6 @@ export default function Hacker() {
     <Wrapper>
       <Nav />
       <div className='medic-panel'>
-        <h2>Happy hacking!</h2>
-        <ol style={{ textAlign: 'left' }}>
-          <li>✅ 533VZP1: alpha-01 - labyrint - zpráva ve stanici Defensorů</li>
-          <li>
-            ✅ 227PRT3: omega-03 - heslo bez minihry - chatovací program s
-            brigádou
-          </li>
-          <li>✅ 648ZUU2: nyx-04 - uzel 32CON45422311 - vypnutí elektřiny</li>
-          <li>
-            ✅ 694LEX7: kv-05 - bez zabezpečení - nahrávání duše, potom audio
-          </li>
-          <li>
-            ✅ 623BEL1: tau-06 - heslo (??? jaké ???) + minihra - audio Belib
-          </li>
-          <li>
-            789PYK6: sigma-07 - labyrint + heslo (??? jaké ???) + minihra - 3
-            uzly:
-            <ul>
-              <li>bez zabezpečení - audio Pykač</li>
-              <li>heslo (??? jaké ???) bez minihry - audio Pykač 2</li>
-              <li>
-                uzel č. 33CON33333333: heslo (Sal@moun66) s minihrou - mazání
-                Pykače
-              </li>
-            </ul>
-          </li>
-          <li>
-            ⏳ 753ZFZ3 - beta-08 - nejsložitější možné zabezpečení - heslo k
-            Fehérově tabletu
-          </li>
-        </ol>
         <div className='hacker-page'>
           <CipherInput ciphersList={ciphersList} startSession={startSession} />
           <SolvedCiphers solvedCiphers={solvedCiphers} />

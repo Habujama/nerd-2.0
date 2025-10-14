@@ -49,7 +49,7 @@ const PasswordGate = ({ sessionId, children }: PasswordGateProps) => {
     setShowGame(true)
   )
 
-  if (unlocked) return <>{children}</>;
+  if (unlocked) return <div>{children}</div>;
 
   return (
     <div className="pwd-gate-wrapper">

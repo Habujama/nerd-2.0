@@ -205,7 +205,7 @@ const Nodes = ({ allNodes, onNodeClick, feedbackNode }: NodesProps) => {
 
   // --- Vykreslení uzlů ---
   return (
-    <svg viewBox='0 0 800 1000' className='node' ref={svgRef}>
+    <svg viewBox='0 0 800 1500' ref={svgRef}>
       <defs>
         <linearGradient id='myGradient'>
           <stop offset='0%' stopColor='#00CC66' />

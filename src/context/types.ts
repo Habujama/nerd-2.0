@@ -49,7 +49,7 @@ export const MazeMatrix: Record<number, Matrix> = {
   3: [], 
   4: [],
   5: ["FIFIW", "FIWFI", "FWFFI", "IFIFW", 'WFFFII'],
-  6: ["FFWI", "IWFI", "WIFI", "IIFW", "FIWFI", "FWFFI", "IFIFW"]
+  6: ["FFWI", "IWFI", "WIFI", "IIFW", "FIWFI", "FWFFI", "IFIFW", 'FIWFI', "WIIF", "FFFIW", "FIFIWF"]
 };
 
 export const ROUTE_MAP: Record<string, string> = {
