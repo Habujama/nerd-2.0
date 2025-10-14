@@ -34,6 +34,7 @@ export type AuthContextType = {
   markCipherUnsolved: (key: string) => void;
   getSolvedCount: () => number;
   resetAllCiphers: () => void;
+  initialized: boolean;
 };
 
 export const CipherKeys = [
