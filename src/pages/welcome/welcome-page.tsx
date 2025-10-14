@@ -1,4 +1,4 @@
-import { type JSX, useState } from 'react';
+import { type JSX } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/use-context';
@@ -6,16 +6,14 @@ import { MEDIC, HACKER, MILITARY } from '../../context/types';
 import './welcome-page.css';
 import Wrapper from '../../components/wrapper/wrapper';
 import EuLogo from '../../components/eulogo/eu-logo';
-import EyeOpenIcon from '../../assets/eye-svgrepo-com.tsx';
-import EyeClosedIcon from '../../assets/eye-slash-svgrepo-com.tsx';
+import PasswordInput from '../../components/hacker-components/password-input/password-input.tsx';
 
-type FormValues = {
+export type FormValues = {
   username: string;
   password: string;
 };
 
 export default function LoginPage(): JSX.Element {
-  const [showInput, setShowInput] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -60,10 +58,6 @@ export default function LoginPage(): JSX.Element {
     }
   };
 
-  const handleShowPassword = () => {
-    setShowInput(!showInput);
-  };
-
   return (
     <Wrapper alignStart={false}>
       <form className='login-form' onSubmit={handleSubmit(onSubmit)}>
@@ -80,30 +74,17 @@ export default function LoginPage(): JSX.Element {
             onBlur={() => clearErrors()}
             placeholder='Zadej uživatelské jméno'
             className={errors.root ? 'input-error' : 'input-clear'}
+            style={{ width: '300px' }}
           />
         </label>
 
         <label>
           Heslo
-          <div className='input-wrapper'>
-            <input
-              type={showInput ? 'text' : 'password'}
-              {...register('password', { required: 'Heslo je povinné' })}
-              aria-invalid={!!errors.password}
-              aria-describedby='password-error'
-              autoComplete='current-password'
-              onBlur={() => clearErrors()}
-              placeholder='Zadej heslo'
-              className={errors.root ? 'input-error' : 'input-clear'}
-            />
-            <button
-              type='button'
-              onClick={handleShowPassword}
-              className='input-button'
-            >
-              {showInput ? <EyeClosedIcon /> : <EyeOpenIcon />}
-            </button>
-          </div>
+          <PasswordInput
+            register={register}
+            errors={errors}
+            clearErrors={clearErrors}
+          />
         </label>
 
         {errors.root && (
@@ -116,6 +97,7 @@ export default function LoginPage(): JSX.Element {
           type='submit'
           disabled={isSubmitting || !isDirty}
           className='submit-button'
+          style={{ width: '300px' }}
         >
           Přihlásit se
         </button>

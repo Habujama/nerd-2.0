@@ -34,6 +34,7 @@ export default function Session() {
   useEffect(() => {
     if (!sessionId) return;
     const session = loadSession(sessionId);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 
     if (!session) {
       navigate('/hacker', { replace: true });
@@ -134,15 +135,15 @@ export default function Session() {
   return (
     <Wrapper>
       <button onClick={handleNavigateBack} className='back-button'>
-        Zpět na hlavní panel
+        ⬅
       </button>
       {finished && (
-        <div className='success'>
+        <div className='session-success'>
           <h3>⏳ Odemykám přístup k uzlu...</h3>
         </div>
       )}
       {breachFound && (
-        <div className='error'>
+        <div className='session-error'>
           <h3>
             ⚠️ Zaznamenán neautorizovaný pokus o vniknutí. Přerušuji spojení...
           </h3>

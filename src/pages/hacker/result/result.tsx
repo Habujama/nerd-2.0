@@ -40,8 +40,8 @@ export default function Result() {
   return (
     <Wrapper>
       <Nav />
-      <button onClick={handleBackClick} className='results-button'>
-        Zpět na hlavní panel
+      <button onClick={handleBackClick} className='back-button'>
+        ⬅
       </button>
       <div className='results-wrapper'>
         <Component sessionId={sessionId} />

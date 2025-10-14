@@ -1,0 +1,75 @@
+.locked-wrapper {
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    justify-items: center;
+    width: 50%;
+}
+
+@media screen and (max-width: 400px) {
+  .locked-wrapper {
+    gap: 0.5rem;
+    width: 100%;
+  }
+}
+
+.pwd-link-button {
+    text-decoration: underline;
+    border: none;
+    background-color: transparent;
+}
+
+.pwd-link-button:hover {
+    background-color: transparent;
+    border:none;
+    color: #00CC66;
+}
+
+.pwd-link-button:active:focus {
+    background-color: transparent;
+    border:none;
+    color: #00CC66;
+    box-shadow: none;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding-right: 2.5rem;
+  box-sizing: border-box;
+}
+
+.input-button {
+  position: absolute;
+  right: 0.6rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  height: 100%;
+  width: fit-content;
+  box-shadow: none;
+   width: 18px;
+  height: 18px;
+  opacity: 0.75;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  color: #66FFB2;
+}
+
+.input-button:hover {
+  background: none;
+  border: none;
+  box-shadow: none;
+   opacity: 1;
+  transform: scale(1.1);
+  color: #00CC66;
+}
+

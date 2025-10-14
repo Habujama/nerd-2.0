@@ -18,7 +18,15 @@ function RequireAuth({
   allowedRole: 'hacker' | 'medic' | 'military';
 }) {
   const location = useLocation();
-  const { role } = useAuth();
+  const { role, initialized } = useAuth();
+
+  if (!initialized) {
+    return (
+      <div style={{ textAlign: 'center', marginTop: '3rem' }}>
+        <p>Načítám data…</p>
+      </div>
+    );
+  }
 
   if (role !== allowedRole) {
     return <Navigate to='/' state={{ from: location }} replace />;

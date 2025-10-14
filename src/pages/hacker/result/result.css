@@ -1,5 +1,83 @@
-.results-button {
-   width: fit-content;
+.back-button {
+    position: fixed;
+    bottom: 3rem;
+    left: 3rem;
+    width: fit-content;
     align-self: flex-start;
-    margin: 8rem 0 0 3rem;
+}
+
+.results-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5rem 3rem;
+    width: 100%;
+}
+
+.nyx-buttons {
+    display: flex;
+    gap: 3rem;
+}
+
+.grid-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 2rem;
+}
+
+@media screen and (max-width: 400px) {
+  .nyx-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+.choice-button {
+    border-radius: 100%;
+    padding: 4rem 1.5rem;
+    box-shadow: 0 0 12px #00CC66;
+}
+
+.list-no-bullets {
+    text-align: justify;
+}
+
+.text-block {
+    margin: 3rem;
+    padding: 2rem 3rem;
+}
+
+.detail-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 25%;
+    right: 10%;
+    left: 10%;
+    background: #0A0F0D;
+    padding: 2rem;
+    border-radius: 1rem;
+    border: #00CC66 3px solid;
+    box-shadow: 0 0 20px #00CC66;
+    z-index: 10;
+}
+
+.message > button {
+    width: fit-content;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    position: absolute;
+    display: inline-block;
+    top: 1rem;
+    right: 1rem;
 }

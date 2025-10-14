@@ -40,7 +40,7 @@ const CipherInput = ({ ciphersList, startSession }: CipherInputProps) => {
 return (
   <form onSubmit={handleSubmit(onSubmit)} className='hacker-form'>
     <label>
-      Vlož klíč uzlu
+      Vlož číslo portu
       <input
         type='text'
         {...register('cipherKey', {
@@ -61,6 +61,7 @@ return (
     <button
       type='submit'
       disabled={isSubmitting || (isDirty && !!errors.cipherKey)}
+      style={{ margin: 'auto' }}
     >
       Potvrdit
     </button>

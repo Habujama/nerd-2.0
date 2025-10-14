@@ -22,7 +22,7 @@ const MiniGame = ({ sessionId, setGameWon }: MiniGameProps) => {
     if (!available.some(([r, c]) => r === row && c === col)) return;
 
     const value = initialGrid[row][col];
-    if (value === 'FIN') {
+    if (value === 'Obnovit') {
       setGameWon(true);
       return;
     }
@@ -72,12 +72,16 @@ const MiniGame = ({ sessionId, setGameWon }: MiniGameProps) => {
                 onClick={() => handleClick(r, c)}
                 disabled={!isAvailable && !isCurrent}
                 style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                   height: '60px',
+                  width: '60px',
                   margin: 0,
                   backgroundColor: isCurrent
                     ? '#646cff'
                     : isAvailable
-                    ? cell === 'FIN'
+                    ? cell === 'Obnovit'
                       ? '#FF4D4D'
                       : '#00CC66'
                     : '#0A0F0D',

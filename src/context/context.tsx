@@ -47,21 +47,30 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [role, setRole] = useState<Role | null>(null);
   const [username, setUsername] = useState<string | null>(null);
   const [ciphersList, setCiphersList] = useState<CipherInfo[]>([]);
+  const [initialized, setInitialized] = useState<boolean>(false);
 
   // Load initial state from localStorage
   useEffect(() => {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return;
-      const parsed: StoredAuth = JSON.parse(raw);
+    if (typeof window === 'undefined') return;
 
-      setRole(parsed.role ?? null);
-      setUsername(parsed.username ?? null);
-      const loadedCiphersFromStorage = loadCiphersFromStorage();
-      setCiphersList(loadedCiphersFromStorage);
-    } catch {
-      console.error('error loading state from localStorage');
-    }
+    // krátké zpoždění zajistí, že localStorage už bude ready po hydrataci
+    setTimeout(() => {
+      try {
+        const raw = window.localStorage.getItem(STORAGE_KEY);
+        if (!raw) {
+          setCiphersList(makeInitialCiphers());
+          return;
+        }
+        const parsed: StoredAuth = JSON.parse(raw);
+        setRole(parsed.role ?? null);
+        setUsername(parsed.username ?? null);
+        setCiphersList(loadCiphersFromStorage());
+      } catch (err) {
+        console.error('Error loading state from localStorage', err);
+      } finally {
+        setInitialized(true);
+      }
+    }, 0);
   }, []);
 
   // Persist state to localStorage whenever something changes
@@ -138,6 +147,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       isCipherSolved,
       getSolvedCount,
       resetAllCiphers,
+      initialized,
     }),
     [role, username, ciphersList],
   );
