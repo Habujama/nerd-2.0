@@ -105,7 +105,7 @@ export const ROUTE_MAP: Record<string, string> = {
 // 10
   "565XBM7": "/hacker/result/chi-12",
 // 11
-  "323EZR3 ": "/hacker/result/zeta-13",
+  "323EZR3": "/hacker/result/zeta-13",
 
 };
 
