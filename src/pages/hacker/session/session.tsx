@@ -135,7 +135,7 @@ export default function Session() {
   return (
     <Wrapper>
       <button onClick={handleNavigateBack} className='back-button'>
-        Zpět na hlavní panel
+        ⬅
       </button>
       {finished && (
         <div className='session-success'>

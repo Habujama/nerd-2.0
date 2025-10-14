@@ -3,6 +3,7 @@ import Pykac1 from '../../../assets/audio/pykac1.mp3';
 import Pykac2 from '../../../assets/audio/pykac2.mp3';
 import AudioPlayer from '../../../components/audio-player/audio-player';
 import LockedFile from './locked-file/locked-file';
+import DataEraseAnimation from '../../../components/hacker-components/data-erase-animation/data-erase-animation';
 
 interface SigmaO7Props {
   sessionId: string;
@@ -12,6 +13,7 @@ const Sigma07 = ({ sessionId }: SigmaO7Props) => {
   const [showDetails, setShowDetails] = useState<
     'pykac1' | 'pykac2' | 'deletion' | null
   >(null);
+  const [dataErased, setDataErased] = useState<boolean>(false);
 
   return (
     <div className='loading-page'>
@@ -50,14 +52,16 @@ const Sigma07 = ({ sessionId }: SigmaO7Props) => {
           13DEL899222294
         </button>
       </div>
-      {showDetails === 'pykac1' && <AudioPlayer audioFile={Pykac1} />}
+      {showDetails === 'pykac1' && (
+        <AudioPlayer audioFile={Pykac1} disabled={dataErased} />
+      )}
       {showDetails === 'pykac2' && (
         <LockedFile
           sessionId={sessionId}
           password='OhenPali'
           isPwdRecovarable={false}
         >
-          <AudioPlayer audioFile={Pykac2} />
+          <AudioPlayer audioFile={Pykac2} disabled={dataErased} />
         </LockedFile>
       )}
       {showDetails === 'deletion' && (
@@ -66,7 +70,10 @@ const Sigma07 = ({ sessionId }: SigmaO7Props) => {
           password='PykacOverride'
           title='Sekce uzamčena'
         >
-          TODO: přidat zamčený deletion
+          <DataEraseAnimation
+            setDataErased={setDataErased}
+            dataErased={dataErased}
+          />
         </LockedFile>
       )}
     </div>

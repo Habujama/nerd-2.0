@@ -3,9 +3,10 @@ import { Howl } from 'howler';
 
 interface AudioPlayerProps {
   audioFile: string;
+  disabled: boolean;
 }
 
-const AudioPlayer = ({ audioFile }: AudioPlayerProps) => {
+const AudioPlayer = ({ audioFile, disabled }: AudioPlayerProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const soundRef = useRef<Howl | null>(null);
 
@@ -31,9 +32,13 @@ const AudioPlayer = ({ audioFile }: AudioPlayerProps) => {
   };
 
   return (
-      <button onClick={togglePlayback} style={{ width: '400px' }}>
-        {isPlaying ? '⏸ Zastavit záznam' : '▶ Přehrát záznam'}
-      </button>
+    <button
+      onClick={togglePlayback}
+      disabled={disabled}
+      style={{ width: '400px' }}
+    >
+      {isPlaying ? '⏸ Zastavit záznam' : '▶ Přehrát záznam'}
+    </button>
   );
 };
 
