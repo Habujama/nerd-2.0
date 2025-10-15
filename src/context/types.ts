@@ -134,7 +134,7 @@ export const NodePasswords: Record<number, string | null> = {
   6: null,
   7: 'SalvatorovaSpasa',
   8: null,
-  9: null, 
+  9: 'BeranekBozi', 
   10: 'Bourbon', 
   11: null
 }

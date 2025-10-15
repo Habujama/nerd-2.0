@@ -21,7 +21,11 @@ const Omicron9 = ({ sessionId }: ResultTargetProps) => {
   }
 
   return (
-    <LockedFile sessionId={sessionId} password={password}>
+    <LockedFile
+      sessionId={sessionId}
+      password={password}
+      isPwdRecovarable={false}
+    >
       <>
         <h2>Očistec - interní úložiště</h2>
         <div className='nyx-buttons'>
