@@ -15,6 +15,7 @@ import Delta11 from './delta-11';
 import Epsilon10 from './epsilon-10';
 import Omicron9 from './omicron-9';
 import Zeta13 from './zeta-13';
+import Gama14 from './gama-14';
 
 export type ResultTargetProps = { sessionId: string };
 
@@ -31,15 +32,18 @@ const RESULT_MAP: Record<string, React.FC<ResultTargetProps>> = {
   'epsilon-10': Epsilon10,
   'omicron-09': Omicron9,
   'zeta-13': Zeta13,
+  'gama-14': Gama14,
 };
 
 export default function Result() {
   const { name } = useParams<{ name: string }>();
   const navigate = useNavigate();
 
+  console.log(name, 'name');
   if (!name) return <p>Chybí parametr výsledku.</p>;
 
   const Component = RESULT_MAP[name];
+  console.log(RESULT_MAP, 'result');
   if (!Component) return <p>Neznámý výsledek: {name}</p>;
 
   const sessionId =

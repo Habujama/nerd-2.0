@@ -61,7 +61,9 @@ export const CipherKeys = [
   // 10
   '565XBM7',
   // 11
-  '323EZR3'
+  '323EZR3',
+  //12
+  '161MES3'
 ]
 export type Matrix = string[];
 
@@ -78,7 +80,7 @@ export const MazeMatrix: Record<number, Matrix> = {
   9: ["IWFF", "FIFW", "FIWF", "WIFI", "FWIFI"],
   10: ["WFIF", "IFWF", "FIFW", "IWFF", "FIWFI", "IWFFI"],
   11: ["FIWFI", "WFFI", "IWFF", "FIFW", "WFIFI"],
-  12: ["IWFF", "FIWF", "WFIF", "FIFW", "WIFI", "FIWFF"]
+  12:  ['W']/* ["IWFF", "FIWF", "WFIF", "FIFW", "WIFI", "FIWFF"] */
 };
 
 export const ROUTE_MAP: Record<string, string> = {
@@ -106,6 +108,8 @@ export const ROUTE_MAP: Record<string, string> = {
   "565XBM7": "/hacker/result/chi-12",
 // 11
   "323EZR3": "/hacker/result/zeta-13",
+  //12
+  "161MES3": "/hacker/result/gama-14"
 
 };
 
@@ -121,7 +125,8 @@ export const NODE_KEY_MAP: Record<string, string> = {
   '956OCB9': 'epsilon-10',
   '882NEE2': 'delta-11',
   '565XBM7': 'chi-12',
-  '323EZR3': 'zeta-13'
+  '323EZR3': 'zeta-13',
+  '161MES3': 'gama-14',
 };
 
 export const NodePasswords: Record<number, string | null> = {
@@ -136,7 +141,8 @@ export const NodePasswords: Record<number, string | null> = {
   8: null,
   9: 'BeranekBozi', 
   10: 'Bourbon', 
-  11: null
+  11: null,
+  12: null
 }
 
 export const HACKER = [
