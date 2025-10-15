@@ -29,7 +29,7 @@ const RESULT_MAP: Record<string, React.FC<ResultTargetProps>> = {
   'chi-12': Chi12,
   'delta-11': Delta11,
   'epsilon-10': Epsilon10,
-  'omicron-9': Omicron9,
+  'omicron-09': Omicron9,
   'zeta-13': Zeta13,
 };
 

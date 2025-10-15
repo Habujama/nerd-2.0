@@ -17,6 +17,8 @@
 .nyx-buttons {
     display: flex;
     gap: 3rem;
+    justify-content: center;
+    margin-bottom: 3rem;
 }
 
 .grid-buttons {
@@ -33,9 +35,14 @@
 }
 
 .choice-button {
-    border-radius: 100%;
-    padding: 4rem 1.5rem;
-    box-shadow: 0 0 12px #00CC66;
+  width: min(20vw, 10rem);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #00CC66;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 .list-no-bullets {
@@ -45,6 +52,8 @@
 .text-block {
     margin: 3rem;
     padding: 2rem 3rem;
+    display: flex;
+    justify-content: center;
 }
 
 .detail-content {
