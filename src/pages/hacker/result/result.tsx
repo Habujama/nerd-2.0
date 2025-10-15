@@ -39,11 +39,9 @@ export default function Result() {
   const { name } = useParams<{ name: string }>();
   const navigate = useNavigate();
 
-  console.log(name, 'name');
   if (!name) return <p>Chybí parametr výsledku.</p>;
 
   const Component = RESULT_MAP[name];
-  console.log(RESULT_MAP, 'result');
   if (!Component) return <p>Neznámý výsledek: {name}</p>;
 
   const sessionId =

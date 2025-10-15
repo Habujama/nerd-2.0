@@ -1,12 +1,14 @@
 import { useState } from 'react';
-import ConnectionLoader from '../../../components/hacker-components/connecting/connecting';
 import type { Session } from '../../../context/types';
 import LockedFile from './locked-file/locked-file';
 import type { ResultTargetProps } from './result';
+import './result.css';
+import LockUnlockSVG from '../../../assets/lock-unlock';
 
 const Epsilon10 = ({ sessionId }: ResultTargetProps) => {
-const [showDetails, setShowDetails] = useState<
-        'electricity' | 'canteen' | 'delivery' | null>()
+  const [showDetails, setShowDetails] = useState<
+    'vyroba' | 'patient2' | 'chemicka' | 'dolovani' | null
+  >();
   let password: string = '';
   let parsedSession: Session | undefined = undefined;
   const rawSession = localStorage.getItem(`hack_session_${sessionId}`);
@@ -21,113 +23,138 @@ const [showDetails, setShowDetails] = useState<
   }
 
   return (
-      <>
-    <h4>Správa základny</h4>
+    <LockedFile sessionId={sessionId} password={password}>
+      <h2 className='result-title'>Zabezpečení Očistce</h2>
       <div className='nyx-buttons'>
         <button
-          onClick={() => setShowDetails('canteen')}
+          onClick={() => setShowDetails('vyroba')}
           className='choice-button'
           style={
-            showDetails === 'canteen'
+            showDetails === 'vyroba'
               ? { backgroundColor: '#66FFB2', color: '#0A0F0D' }
               : undefined
           }
         >
-          43CON46489321
+          52TRK94628103
         </button>
         <button
-          onClick={() => setShowDetails('delivery')}
+          onClick={() => setShowDetails('patient2')}
           className='choice-button'
           style={
-            showDetails === 'delivery'
+            showDetails === 'patient2'
               ? { backgroundColor: '#66FFB2', color: '#0A0F0D' }
               : undefined
           }
         >
-          31CON77893931
+          37BOM21573459
         </button>
         <button
-          onClick={() => setShowDetails('electricity')}
+          onClick={() => setShowDetails('chemicka')}
           className='choice-button'
           style={
-            showDetails === 'electricity'
+            showDetails === 'chemicka'
               ? { backgroundColor: '#66FFB2', color: '#0A0F0D' }
               : undefined
           }
         >
-          32COM43265698
+          88KLV70319246
         </button>
+        <button
+          onClick={() => setShowDetails('dolovani')}
+          className='choice-button'
+          style={
+            showDetails === 'dolovani'
+              ? { backgroundColor: '#66FFB2', color: '#0A0F0D' }
+              : undefined
+          }
+        >
+          19ZPD86450782
+        </button>
+      </div>
+      {showDetails === 'vyroba' && (
+        <LockedFile sessionId='vyroba' password='Slunce2025'>
+          <div className='text-block'>
+            <div>
+              <h3>Záznam č. 003 – Výroba Hroznů Hněvu</h3>
+              <p>
+                <strong>Oddělení:</strong> Výrobní sekce, blok H
+              </p>
+              <p>
+                <strong>Datum:</strong> 2025-10-16
+              </p>
+              <p>
+                <strong>Instrukce:</strong> Stabilizovaná Látka je přeměněna na
+                Hrozny Hněvu. Proces zahrnuje lisování a formování granátových
+                jednotek podle šarže. Každá várka je testována na koncentraci
+                výbušného materiálu, musí přesně odpovídat normě 5.1.
+              </p>
+              <p>
+                <strong>Poznámka:</strong> Přísně zakázáno manipulovat s
+                neoznačenými jednotkami. Porušení protokolu vede k okamžitému
+                záznamu do disciplinárního protokolu.
+              </p>
+            </div>
           </div>
-          {showDetails === 'electricity' && (
-              <LockedFile
-        sessionId=''
-        password=''
-      >
-        <div className='text-block'>
-          📜 Jídelníček — Kantýna Tábora 34
-          <hr />
-          <ul className='list-no-bullets'>
-            <li>
-              Pondělí: Polévka z čehokoliv (pravděpodobně brambory), placka na
-              oleji.
-            </li>
-            <li>Úterý: Konzerva typu "maso", rýže z výměny, čaj z jehličí.</li>
-            <li>Středa: Houbová směs (zóna 3), chléb z recyklované mouky.</li>
-            <li>Čtvrtek: Sojové kostky po staru (bez soji), vařená voda.</li>
-            <li>
-              Pátek: Ryba z nádrže B, brambory z hydroboxu. Sobota: "Slavnostní"
-              guláš – původ neznámý.
-            </li>
-            <li> Neděle: Zbytek z týdne.</li>
-          </ul>
-          <small>
-            Poznámka: Pokud je jídelní lístek prázdný, znamená to, že zásobování
-            opět selhalo. V takovém případě se prosím přihlaste na dobrovolnický
-            sběr proteinového materiálu.
-          </small>
-                  </div>
-                  </LockedFile>
+        </LockedFile>
       )}
-          {showDetails === 'canteen' && (
-              <LockedFile
-        sessionId=''
-        password=''
-      >
-        <div className='text-block'>
-          📜 Jídelníček — Kantýna Tábora 34
-          <hr />
-          <ul className='list-no-bullets'>
-            <li>
-              Pondělí: Polévka z čehokoliv (pravděpodobně brambory), placka na
-              oleji.
-            </li>
-            <li>Úterý: Konzerva typu "maso", rýže z výměny, čaj z jehličí.</li>
-            <li>Středa: Houbová směs (zóna 3), chléb z recyklované mouky.</li>
-            <li>Čtvrtek: Sojové kostky po staru (bez soji), vařená voda.</li>
-            <li>
-              Pátek: Ryba z nádrže B, brambory z hydroboxu. Sobota: "Slavnostní"
-              guláš – původ neznámý.
-            </li>
-            <li> Neděle: Zbytek z týdne.</li>
-          </ul>
-          <small>
-            Poznámka: Pokud je jídelní lístek prázdný, znamená to, že zásobování
-            opět selhalo. V takovém případě se prosím přihlaste na dobrovolnický
-            sběr proteinového materiálu.
-          </small>
-                  </div>
-                  </LockedFile>
+      {showDetails === 'patient2' && (
+        <LockedFile sessionId='klinika' password='TovarnaHnevu'>
+          <LockUnlockSVG />
+        </LockedFile>
       )}
-      {showDetails === 'delivery' && (
-       <LockedFile
-        sessionId={sessionId}
-        password={password}
-      >
-        <h3>Uzel {sessionId} přístupný</h3>
-        <ConnectionLoader />
-      </LockedFile>
+      {showDetails === 'chemicka' && (
+        <LockedFile sessionId='chemicka' password='Stabilizace'>
+          <div className='text-block'>
+            <div>
+              <h3>Záznam č. 002 – Stabilizace Látky</h3>
+              <p>
+                <strong>Oddělení:</strong> Chemická sekce, blok S
+              </p>
+              <p>
+                <strong>Datum:</strong> 2025-10-16
+              </p>
+              <p>
+                <strong>Instrukce:</strong> Světice přebírají surovou Látku z
+                dolovacího sektoru. Každá jednotka Látky je stabilizována pomocí
+                chemických příměsí podle předpisu 12-B. Nesprávná stabilizace
+                může vést k explozivnímu nebezpečí.
+              </p>
+              <p>
+                <strong>Poznámka:</strong> Po stabilizaci je každá várka
+                zkontrolována kontrolorem kvality a zaznamenána do logu Hrozny
+                Hněvu. Výstup je přenášen do výrobní linky blok H.
+              </p>
+            </div>
+          </div>
+        </LockedFile>
       )}
-    </>
+      {showDetails === 'dolovani' && (
+        <LockedFile sessionId='dolovani' password='Svetice123'>
+          <div className='text-block'>
+            <div>
+              <h3>Záznam č. 001 – Dolování Látky</h3>
+              <p>
+                <strong>Oddělení:</strong> Dolovací sektor, blok C
+              </p>
+              <p>
+                <strong>Datum:</strong> 2025-10-16
+              </p>
+              <p>
+                <strong>Instrukce:</strong> Vězni jsou přiděleni k dolování
+                Látky. Světice dohlížejí na stabilitu tunelů a kontrolují
+                výstupní surovinu. Veškerá Látka nesmí vykazovat více než 0,2%
+                nestability; nestabilní materiál je okamžitě izolován.
+              </p>
+              <p>
+                <strong>Poznámka:</strong> Každá várka je označena číslem dolu a
+                zapsána do centrálního logu. Nedodržení protokolu je považováno
+                za závažné porušení interních směrnic.
+              </p>
+            </div>
+          </div>
+        </LockedFile>
+      )}
+    </LockedFile>
   );
 };
 

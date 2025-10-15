@@ -80,7 +80,7 @@ export const MazeMatrix: Record<number, Matrix> = {
   9: ["IWFF", "FIFW", "FIWF", "WIFI", "FWIFI"],
   10: ["WFIF", "IFWF", "FIFW", "IWFF", "FIWFI", "IWFFI"],
   11: ["FIWFI", "WFFI", "IWFF", "FIFW", "WFIFI"],
-  12:  ['W']/* ["IWFF", "FIWF", "WFIF", "FIFW", "WIFI", "FIWFF"] */
+  12: ["IWFF", "FIWF", "WFIF", "FIFW", "WIFI", "FIWFF"]
 };
 
 export const ROUTE_MAP: Record<string, string> = {
@@ -138,7 +138,7 @@ export const NodePasswords: Record<number, string | null> = {
   5: null,
   6: null,
   7: 'SalvatorovaSpasa',
-  8: null,
+  8: 'Ariadna',
   9: 'BeranekBozi', 
   10: 'Bourbon', 
   11: null,
