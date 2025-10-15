@@ -38,7 +38,32 @@ export type AuthContextType = {
 };
 
 export const CipherKeys = [
-   '533VZP1', '227PRT3' ,'648ZUU2', '694LEX7', '623BEL1', '789PYK6', '753ZFZ3'
+  // 0
+  '533VZP1',
+  // 1
+  '227PRT3',
+  // 2
+  '648ZUU2',
+  // 3
+  '694LEX7',
+  // 4
+  '623BEL1',
+  // 5
+  '789PYK6',
+  // 6
+  '753ZFZ3',
+  // 7
+  '251OCY1',
+  // 8
+  '956OCB9',
+  // 9
+  '882NEE2',
+  // 10
+  '565XBM7',
+  // 11
+  '323EZR3',
+  //12
+  '161MES3'
 ]
 export type Matrix = string[];
 
@@ -49,7 +74,13 @@ export const MazeMatrix: Record<number, Matrix> = {
   3: [], 
   4: [],
   5: ["FIFIW", "FIWFI", "FWFFI", "IFIFW", 'WFFFII'],
-  6: ["FFWI", "IWFI", "WIFI", "IIFW", "FIWFI", "FWFFI", "IFIFW", 'FIWFI', "WIIF", "FFFIW", "FIFIWF"]
+  6: ["FFWI", "IWFI", "WIFI", "IIFW", "FIWFI", "FWFFI", "IFIFW", 'FIWFI', "WIIF", "FFFIW", "FIFIWF"],
+  7: ["WIFI", "FIWF", "IWF", "FIFW", "IWFFI"],
+  8: ["FWIF", "IWF", "FIW", "WFIF", "IFWF", "FIWFI"],
+  9: ["IWFF", "FIFW", "FIWF", "WIFI", "FWIFI"],
+  10: ["WFIF", "IFWF", "FIFW", "IWFF", "FIWFI", "IWFFI"],
+  11: ["FIWFI", "WFFI", "IWFF", "FIFW", "WFIFI"],
+  12: ["IWFF", "FIWF", "WFIF", "FIFW", "WIFI", "FIWFF"]
 };
 
 export const ROUTE_MAP: Record<string, string> = {
@@ -67,6 +98,19 @@ export const ROUTE_MAP: Record<string, string> = {
   "789PYK6": "/hacker/result/sigma-07",
 // 6
   "753ZFZ3": "/hacker/result/beta-08",
+// 7
+  "251OCY1": "/hacker/result/omicron-09",
+// 8
+  "956OCB9": "/hacker/result/epsilon-10",
+// 9
+  "882NEE2": "/hacker/result/delta-11",
+// 10
+  "565XBM7": "/hacker/result/chi-12",
+// 11
+  "323EZR3": "/hacker/result/zeta-13",
+  //12
+  "161MES3": "/hacker/result/gama-14"
+
 };
 
 export const NODE_KEY_MAP: Record<string, string> = {
@@ -77,6 +121,12 @@ export const NODE_KEY_MAP: Record<string, string> = {
   '623BEL1': 'tau-06',
   '789PYK6': 'sigma-07', 
   '753ZFZ3': 'beta-08',
+  '251OCY1': 'omicron-09',
+  '956OCB9': 'epsilon-10',
+  '882NEE2': 'delta-11',
+  '565XBM7': 'chi-12',
+  '323EZR3': 'zeta-13',
+  '161MES3': 'gama-14',
 };
 
 export const NodePasswords: Record<number, string | null> = {
@@ -87,6 +137,12 @@ export const NodePasswords: Record<number, string | null> = {
   4: null,
   5: null,
   6: null,
+  7: 'SalvatorovaSpasa',
+  8: 'Ariadna',
+  9: 'BeranekBozi', 
+  10: 'Bourbon', 
+  11: null,
+  12: null
 }
 
 export const HACKER = [
@@ -116,6 +172,10 @@ export const MEDIC = [
   {
     username: 'michelle',
     password: 'ezra_vstal',
+  },
+    {
+    username: 'diana',
+    password: 'do_edenu',
   },
 ];
 

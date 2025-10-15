@@ -10,6 +10,12 @@ import Wrapper from '../../../components/wrapper/wrapper';
 import Nav from '../../../components/nav/nav';
 import './result.css';
 import { NODE_KEY_MAP } from '../../../context/types';
+import Chi12 from './chi-12';
+import Delta11 from './delta-11';
+import Epsilon10 from './epsilon-10';
+import Omicron9 from './omicron-9';
+import Zeta13 from './zeta-13';
+import Gama14 from './gama-14';
 
 export type ResultTargetProps = { sessionId: string };
 
@@ -21,6 +27,12 @@ const RESULT_MAP: Record<string, React.FC<ResultTargetProps>> = {
   'kv-05': Kv05,
   'tau-06': Tau06,
   'sigma-07': Sigma07,
+  'chi-12': Chi12,
+  'delta-11': Delta11,
+  'epsilon-10': Epsilon10,
+  'omicron-09': Omicron9,
+  'zeta-13': Zeta13,
+  'gama-14': Gama14,
 };
 
 export default function Result() {

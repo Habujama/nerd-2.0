@@ -6,19 +6,23 @@ interface ExtractionReadyProps {
     setExtractionIntercepted: (isLoading: boolean) => void
 }
 
-const ExtractionReady = ({setIsExtracting, setExtractionStatus, setExtractionIntercepted}:ExtractionReadyProps) => (
-    <>
-        <button
-              onClick={() => {
-                setExtractionStatus([false, false, false, false, false]);
-                setIsExtracting(true);
-                setExtractionIntercepted(false);
-              }}
-              className='loading-ready'
-            >
-              Zahájit extrahování duše
-            </button>
-      </>
+const ExtractionReady = ({
+  setIsExtracting,
+  setExtractionStatus,
+  setExtractionIntercepted,
+}: ExtractionReadyProps) => (
+  <>
+    <button
+      onClick={() => {
+        setExtractionStatus([false, false, false, false, false]);
+        setIsExtracting(true);
+        setExtractionIntercepted(false);
+      }}
+      className='loading-ready'
+    >
+      Zahájit stahování duše
+    </button>
+  </>
 );
 
 export default ExtractionReady;
