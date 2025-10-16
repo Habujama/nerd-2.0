@@ -63,7 +63,9 @@ export const CipherKeys = [
   // 11
   '323EZR3',
   //12
-  '161MES3'
+  '161MES3',
+  // 13
+  '111AAA1'
 ]
 export type Matrix = string[];
 
@@ -80,7 +82,8 @@ export const MazeMatrix: Record<number, Matrix> = {
   9: ["IWFF", "FIFW", "FIWF", "WIFI", "FWIFI"],
   10: ["WFIF", "IFWF", "FIFW", "IWFF", "FIWFI", "IWFFI"],
   11: ["FIWFI", "WFFI", "IWFF", "FIFW", "WFIFI"],
-  12: ["IWFF", "FIWF", "WFIF", "FIFW", "WIFI", "FIWFF"]
+  12: ["IWFF", "FIWF", "WFIF", "FIFW", "WIFI", "FIWFF"],
+  13: ["WIF", "FWI"]
 };
 
 export const ROUTE_MAP: Record<string, string> = {
@@ -109,8 +112,9 @@ export const ROUTE_MAP: Record<string, string> = {
 // 11
   "323EZR3": "/hacker/result/zeta-13",
   //12
-  "161MES3": "/hacker/result/gama-14"
-
+  "161MES3": "/hacker/result/gama-14",
+  //13
+  "111AAA1": "/hacker/result/workshop"
 };
 
 export const NODE_KEY_MAP: Record<string, string> = {

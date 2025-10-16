@@ -11,7 +11,7 @@ export const detailsMap: Record<
   [Details.Service]: {
     code: '27BXR90351247',
     content: (
-      <LockedFile sessionId='orion' password='orion7'>
+      <LockedFile password='orion7' gameDifficulty='hard'>
         <div>
           <h3>ZPRÁVA O ÚDRŽBĚ – JEDNOTKA ORION-7</h3>
           <p>Kód: MT-034/22</p>
@@ -30,7 +30,7 @@ export const detailsMap: Record<
   [Details.Transport]: {
     code: '83LAN72594602',
     content: (
-      <LockedFile sessionId='lg' password='lg192'>
+      <LockedFile password='lg192'>
         <div>
           <h3>ZÁZNAM O PŘEPRAVĚ MATERIÁLU</h3>
           <p>Kód: LG-192/B</p>
@@ -43,7 +43,7 @@ export const detailsMap: Record<
   [Details.Core]: {
     code: '46MPT11837659',
     content: (
-      <LockedFile sessionId='sig' password='sigma'>
+      <LockedFile password='sigma'>
         <div>
           <h3>TECHNICKÁ ZPRÁVA – REAKTOROVÉ JÁDRO SIGMA</h3>
           <p>Reaktor pracuje v normálním režimu. Všechny hodnoty v limitu.</p>
@@ -64,7 +64,7 @@ export const detailsMap: Record<
   [Details.Delta]: {
     code: '59QEV64283901',
     content: (
-      <LockedFile sessionId='session-placeholder' password='delta'>
+      <LockedFile password='delta'>
         <div>
           <h3>SEZNAM NÁHRADNÍCH DÍLŮ – SEKCE DELTA</h3>
           <p>Kód: INV-D/77</p>
@@ -86,7 +86,7 @@ export const detailsMap: Record<
   [Details.Drone]: {
     code: '72DAR91645820',
     content: (
-      <LockedFile sessionId='session-placeholder' password='scout'>
+      <LockedFile password='scout'>
         <div>
           <h3>ZPRÁVA O HAVARII DRONU SCOUT-12</h3>
           <p>Kód: DRN/12/BRK</p>
@@ -104,7 +104,7 @@ export const detailsMap: Record<
   [Details.Locked]: {
     code: '10ZUN58420377',
     content: (
-      <LockedFile sessionId='session-placeholder' password='feher'>
+      <LockedFile password='feher' gameDifficulty='hard'>
         Heslo k zážehové stanici: Rv9isBgg
       </LockedFile>
     ),
@@ -112,7 +112,7 @@ export const detailsMap: Record<
   [Details.Data]: {
     code: '94HOC33279154',
     content: (
-      <LockedFile sessionId='sessiosss' password='sec4b'>
+      <LockedFile password='sec4b'>
         <div>
           <h3>PROTOKOL O PŘÍSTUPU – DATOVÁ KOMORA 4B</h3>
           <p>Kód: SEC/4B/217</p>
@@ -133,7 +133,7 @@ export const detailsMap: Record<
   [Details.Calibration]: {
     code: '38TAR73420951',
     content: (
-      <LockedFile sessionId='session-placeholder' password='caliber'>
+      <LockedFile password='caliber'>
         <div>
           <h3>ZPRÁVA O KALIBRACI – KOMUNIKAČNÍ UZEL EPSILON</h3>
           <p>Kód: 38TAR73420951</p>
@@ -150,7 +150,7 @@ export const detailsMap: Record<
   [Details.Fuel]: {
     code: '24LUX68591307',
     content: (
-      <LockedFile sessionId='session-placeholder' password='24pal'>
+      <LockedFile password='24pal'>
         <div>
           <h3>ZÁZNAM O SPOTŘEBĚ PALIVA – HLAVNÍ POHONNÁ SEKCE</h3>
           <p>Kód: 24LUX68591307</p>
@@ -170,7 +170,7 @@ export const detailsMap: Record<
   [Details.Cryo]: {
     code: '61VEM50239864',
     content: (
-      <LockedFile sessionId='session-placeholder' password='4Bsec1'>
+      <LockedFile password='4Bsec1'>
         <div>
           <h3>TECHNICKÝ ZÁZNAM – ÚLOŽIŠTĚ 2A</h3>
           <p>Kód: SEC/4B/217</p>
@@ -190,7 +190,7 @@ export const detailsMap: Record<
   [Details.Gravity]: {
     code: '94HOC33269354',
     content: (
-      <LockedFile sessionId='session-placeholder' password='217dat'>
+      <LockedFile password='217dat' gameDifficulty='hard'>
         <div>
           <h3>PROTOKOL O PŘÍSTUPU – DATOVÁ KOMORA 4B</h3>
           <p>Kód: SEC/4B/217</p>
@@ -211,7 +211,7 @@ export const detailsMap: Record<
   [Details.Life]: {
     code: '47HEN99837452',
     content: (
-      <LockedFile sessionId='session-placeholder' password='472grav'>
+      <LockedFile password='472grav'>
         <div>
           <h3>ZPRÁVA O PŘENASTAVENÍ GRAVITAČNÍCH GENERÁTORŮ</h3>
           <p>Kód: 47HEN99837452</p>

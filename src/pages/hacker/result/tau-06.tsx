@@ -2,13 +2,9 @@ import LockedFile from './locked-file/locked-file';
 import Belib from '../../../assets/audio/Belib.mp3';
 import AudioPlayer from '../../../components/audio-player/audio-player';
 
-interface Kv05Props {
-  sessionId: string;
-}
-
-const Tau06 = ({ sessionId }: Kv05Props) => (
+const Tau06 = () => (
   <div className='loading-page'>
-    <LockedFile sessionId={sessionId} password='Taskent'>
+    <LockedFile password='Taskent'>
       <AudioPlayer audioFile={Belib} />
     </LockedFile>
   </div>

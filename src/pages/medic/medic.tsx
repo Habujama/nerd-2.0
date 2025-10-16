@@ -3,13 +3,15 @@ import { useState } from 'react';
 import Ekg from '../../assets/ekg.jsx';
 import MedicLogo from '../../assets/medic-logo.tsx';
 import EkgExitus from '../../assets/ekg-dead.jsx';
+import MedicVideo from '../../assets/audio/mozek-mensi.mp4';
 import Nav from '../../components/nav/nav.tsx';
 import Wrapper from '../../components/wrapper/wrapper.js';
 import MedicValues from './medic-values.js';
 
 const MedicPage = () => {
-  const [isReadingDead, setIsReadingDead] = useState(false);
-  const [isReadingAlive, setIsReadingAlive] = useState(false);
+  const [isReadingDead, setIsReadingDead] = useState<boolean>(false);
+  const [isReadingAlive, setIsReadingAlive] = useState<boolean>(false);
+  const [isPlayingVideo, setIsPlayingVideo] = useState<boolean>(false);
 
   return (
     <Wrapper>
@@ -19,34 +21,65 @@ const MedicPage = () => {
           onClick={() => {
             setIsReadingDead(true);
             setIsReadingAlive(false);
+            setIsPlayingVideo(false);
           }}
           disabled={isReadingDead}
           className='dead'
         >
           <MedicLogo
-            width={isReadingAlive || isReadingDead ? '50px' : '200px'}
+            width={
+              isPlayingVideo || isReadingAlive || isReadingDead
+                ? '50px'
+                : '200px'
+            }
           />
         </button>
-        {!isReadingAlive && !isReadingDead && (
+        {!isPlayingVideo && !isReadingAlive && !isReadingDead && (
           <button
             onClick={() => {
               setIsReadingAlive(true);
               setIsReadingDead(false);
+              setIsPlayingVideo(false);
             }}
             className='reading-button'
           >
             Natočit EKG pacientovi
           </button>
         )}
-        {(isReadingAlive || isReadingDead) && (
+        {!isPlayingVideo && (isReadingAlive || isReadingDead) && (
           <button
             onClick={() => {
               setIsReadingAlive(false);
               setIsReadingDead(false);
+              setIsPlayingVideo(false);
             }}
             className='reading-button'
           >
             Ukončit snímání
+          </button>
+        )}
+        {!isPlayingVideo && !isReadingAlive && !isReadingDead && (
+          <button
+            onClick={() => {
+              setIsReadingAlive(false);
+              setIsReadingDead(false);
+              setIsPlayingVideo(true);
+            }}
+            style={{ maxWidth: '200px', marginTop: '3rem' }}
+          >
+            Extrahovat čip
+          </button>
+        )}
+        {isPlayingVideo && (
+          <button
+            onClick={() => {
+              setIsReadingAlive(false);
+              setIsReadingDead(false);
+              setIsPlayingVideo(false);
+            }}
+            className='back-button'
+          >
+            Zpět na hlavní panel
           </button>
         )}
       </div>
@@ -71,6 +104,11 @@ const MedicPage = () => {
           </div>
           <EkgExitus />
         </>
+      )}
+      {isPlayingVideo && (
+        <div style={{ width: '100%' }}>
+          <video src={MedicVideo} controls={true} width='50%' height='50%' />
+        </div>
       )}
     </Wrapper>
   );

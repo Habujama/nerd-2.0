@@ -9,6 +9,7 @@ import { AuthProvider } from './context/context';
 import { useAuth } from './context/use-context';
 import Session from './pages/hacker/session/session';
 import Result from './pages/hacker/result/result';
+import Necrohacking from './pages/hacker/necrohacking/necrohacking';
 
 function RequireAuth({
   children,
@@ -65,10 +66,10 @@ function App() {
           }
         />
         <Route
-          path='/chat-unlocked'
+          path='/necrohacking'
           element={
             <RequireAuth allowedRole='hacker'>
-              <Hacker />
+              <Necrohacking />
             </RequireAuth>
           }
         />

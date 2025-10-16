@@ -13,7 +13,6 @@ const Beta08 = ({ sessionId }: Beta08Props) => {
   const [unlockedDetail, setUnlockedDetail] = useState<Details | null>(null);
 
   const handleUnlock = (detailKey: Details) => {
-    // odemkne jeden, ostatní zamkne
     setUnlockedDetail(detailKey);
   };
 

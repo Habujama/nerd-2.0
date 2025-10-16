@@ -21,11 +21,7 @@ const Omicron9 = ({ sessionId }: ResultTargetProps) => {
   }
 
   return (
-    <LockedFile
-      sessionId={sessionId}
-      password={password}
-      isPwdRecovarable={false}
-    >
+    <LockedFile password={password} isPwdRecovarable={false}>
       <>
         <h2>Očistec - interní úložiště</h2>
         <div className='nyx-buttons'>
@@ -64,7 +60,7 @@ const Omicron9 = ({ sessionId }: ResultTargetProps) => {
           </button>
         </div>
         {showDetails === 'access' && (
-          <LockedFile sessionId='aa' password='BezpecnostJeZaklad'>
+          <LockedFile password='BezpecnostJeZaklad'>
             <div className='text-block'>
               Přístupové údaje k bezpečnostní bráně Očistce
               <hr />
@@ -83,7 +79,7 @@ const Omicron9 = ({ sessionId }: ResultTargetProps) => {
           </LockedFile>
         )}
         {showDetails === 'patients' && (
-          <LockedFile sessionId='svetice' password='ZivotSvetice'>
+          <LockedFile password='ZivotSvetice'>
             <div className='text-block'>
               <h3>LÉKAŘSKÁ ZPRÁVA č. 47/9</h3>
               <p>Vypracoval: medik druhého stupně Julián Kord</p>
@@ -249,7 +245,7 @@ const Omicron9 = ({ sessionId }: ResultTargetProps) => {
           </LockedFile>
         )}
         {showDetails === 'gate' && (
-          <LockedFile sessionId='svetice' password='Letenka'>
+          <LockedFile password='Letenka'>
             <div className='text-block'>
               <>
                 <h3>INTERNÍ OZNÁMENÍ č. E-17/212</h3>
