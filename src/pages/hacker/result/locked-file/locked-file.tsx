@@ -6,19 +6,19 @@ import './locked-file.css';
 
 interface LockedFileProps {
   password: string;
-  sessionId: string;
-  title?: string;
   isPwdRecovarable?: boolean;
   children: React.ReactNode;
+  gameDifficulty?: 'easy' | 'hard';
+  title?: string;
   unlocked?: boolean; // <- volitelné
   onUnlock?: () => void; // <- volitelné
 }
 
 const LockedFile = ({
   password,
-  sessionId,
   title,
   isPwdRecovarable = true,
+  gameDifficulty = 'easy',
   children,
   unlocked: unlockedProp, // controlled režim
   onUnlock,
@@ -130,7 +130,7 @@ const LockedFile = ({
 
       {showGame && (
         <>
-          <MiniGame sessionId={sessionId} setGameWon={handleGameWon} />
+          <MiniGame difficulty={gameDifficulty} setGameWon={handleGameWon} />
           <button
             onClick={() => setShowGame(false)}
             className='pwd-link-button'

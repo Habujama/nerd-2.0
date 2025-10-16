@@ -8,11 +8,8 @@ import ExtractionReady from './loading-mind/extraction-ready';
 import ExtractionInProgress from './loading-mind/extraction-in-progress';
 import ExtractionIntercepted from './loading-mind/extraction-intercepted';
 
-interface SigmaO7Props {
-  sessionId: string;
-}
 
-const Sigma07 = ({ sessionId }: SigmaO7Props) => {
+const Sigma07 = () => {
   const [loadingStatus, setExtractionStatus] = useState([
     false,
     false,
@@ -156,20 +153,12 @@ const Sigma07 = ({ sessionId }: SigmaO7Props) => {
         </>
       )}
       {showDetails === 'pykac2' && (
-        <LockedFile
-          sessionId={sessionId}
-          password='OhenPali'
-          isPwdRecovarable={false}
-        >
+        <LockedFile password='OhenPali' isPwdRecovarable={false}>
           <AudioPlayer audioFile={Pykac2} disabled={dataErased} />
         </LockedFile>
       )}
       {showDetails === 'deletion' && (
-        <LockedFile
-          sessionId={sessionId}
-          password='PykacOverride'
-          title='Sekce uzamčena'
-        >
+        <LockedFile password='PykacOverride' title='Sekce uzamčena'>
           <DataEraseAnimation
             setDataErased={setDataErased}
             dataErased={dataErased}

@@ -1,24 +1,28 @@
-import { useState } from "react";
-import { ciphers } from './game-data.ts';
+import { useState, useMemo } from 'react';
+import { ciphers, difficultCiphers } from './game-data.ts';
 import './minigame.css';
 
 interface MiniGameProps {
-  sessionId: string;
   setGameWon: (gameWon: boolean) => void;
+  difficulty?: 'easy' | 'hard';
 }
 
-const MiniGame = ({ sessionId, setGameWon }: MiniGameProps) => {
-  const initialGrid: (string | number)[][] =
-    ciphers.find((cipher) => cipher.sessionId === sessionId)?.grid ??
-    ciphers[0].grid;
+const MiniGame = ({ difficulty = 'easy', setGameWon }: MiniGameProps) => {
+  // Náhodně vybere matici podle obtížnosti
+  const initialGrid: (string | number)[][] = useMemo(() => {
+    const source = difficulty === 'hard' ? difficultCiphers : ciphers;
+    const randomCipher = source[Math.floor(Math.random() * source.length)];
+    console.log(
+      `🎲 Spuštěna ${difficulty === 'hard' ? 'těžká' : 'lehká'} matice.`,
+    );
+    return randomCipher.grid;
+  }, [difficulty]);
 
   const size = initialGrid.length;
-
-  const [currentPos, setCurrentPos] = useState([0, 0]);
-  const [available, setAvailable] = useState([[0, 0]]); // povolené tahy
+  const [currentPos, setCurrentPos] = useState<[number, number]>([0, 0]);
+  const [available, setAvailable] = useState<[number, number][]>([[0, 0]]);
 
   function handleClick(row: number, col: number) {
-    // smí se kliknout jen na povolené
     if (!available.some(([r, c]) => r === row && c === col)) return;
 
     const value = initialGrid[row][col];
@@ -28,10 +32,8 @@ const MiniGame = ({ sessionId, setGameWon }: MiniGameProps) => {
     }
 
     const step = Number(value);
-    const newAvailable: ((prevState: number[][]) => number[][]) | number[][] =
-      [];
-
-    const directions = [
+    const newAvailable: [number, number][] = [];
+    const directions: [number, number][] = [
       [step, 0],
       [-step, 0],
       [0, step],
@@ -48,6 +50,11 @@ const MiniGame = ({ sessionId, setGameWon }: MiniGameProps) => {
 
     setCurrentPos([row, col]);
     setAvailable(newAvailable);
+  }
+
+  function handleReset() {
+    setCurrentPos([0, 0]);
+    setAvailable([[0, 0]]);
   }
 
   return (
@@ -77,7 +84,6 @@ const MiniGame = ({ sessionId, setGameWon }: MiniGameProps) => {
                   alignItems: 'center',
                   height: '60px',
                   width: '60px',
-                  margin: 0,
                   backgroundColor: isCurrent
                     ? '#646cff'
                     : isAvailable
@@ -85,6 +91,9 @@ const MiniGame = ({ sessionId, setGameWon }: MiniGameProps) => {
                       ? '#FF4D4D'
                       : '#00CC66'
                     : '#0A0F0D',
+                  border: '1px solid #00CC66',
+                  color: '#ffffff',
+                  fontFamily: 'monospace',
                 }}
               >
                 {cell}
@@ -93,15 +102,8 @@ const MiniGame = ({ sessionId, setGameWon }: MiniGameProps) => {
           }),
         )}
       </div>
-      <button
-        style={{ marginTop: '1rem' }}
-        onClick={() => {
-          setCurrentPos([0, 0]);
-          setAvailable([[0, 0]]);
-        }}
-      >
-        reset
-      </button>
+
+      <button onClick={handleReset}>resetovat hru</button>
     </div>
   );
 };

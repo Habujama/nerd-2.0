@@ -22,7 +22,7 @@ const Delta11 = ({ sessionId }: ResultTargetProps) => {
   }
 
   return (
-    <LockedFile sessionId={sessionId} password={password}>
+    <LockedFile password={password}>
       <h2 className='result-title'>
         Interní databáze Salvatorovy Poklikliniky U&nbsp;Všech Svatých
       </h2>
@@ -73,7 +73,7 @@ const Delta11 = ({ sessionId }: ResultTargetProps) => {
         </button>
       </div>
       {showDetails === 'log' && (
-        <LockedFile sessionId='log' password='608090'>
+        <LockedFile password='608090'>
           <div className='text-block'>
             <div className='medical-notes'>
               <h2>Interní poznámky k výpisu</h2>
@@ -339,7 +339,7 @@ const Delta11 = ({ sessionId }: ResultTargetProps) => {
         </LockedFile>
       )}
       {showDetails === 'patient2' && (
-        <LockedFile sessionId='klinika' password='DrRath'>
+        <LockedFile password='DrRath'>
           <div className='text-block'>
             <h2>Salvatorova Poliklinika U Všech Svatých</h2>
             <p>
@@ -393,7 +393,7 @@ const Delta11 = ({ sessionId }: ResultTargetProps) => {
         </LockedFile>
       )}
       {showDetails === 'patient1' && (
-        <LockedFile sessionId='patient1' password='SedmickaVKrabici'>
+        <LockedFile password='SedmickaVKrabici'>
           <div className='text-block'>
             <article>
               <header>
@@ -475,7 +475,7 @@ const Delta11 = ({ sessionId }: ResultTargetProps) => {
         </LockedFile>
       )}
       {showDetails === 'patient3' && (
-        <LockedFile sessionId='patient3' password='DrNeboliTo'>
+        <LockedFile password='DrNeboliTo'>
           <div className='text-block'>
             <article>
               <header>

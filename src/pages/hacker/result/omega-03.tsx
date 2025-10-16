@@ -19,7 +19,7 @@ const Omega03 = ({ sessionId }: ResultTargetProps) => {
 
   return (
     <>
-      <LockedFile sessionId={sessionId} password={password}>
+      <LockedFile password={password}>
         <h3>Uzel {sessionId} přístupný</h3>
         <ConnectionLoader />
       </LockedFile>

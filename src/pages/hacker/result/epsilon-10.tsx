@@ -23,7 +23,7 @@ const Epsilon10 = ({ sessionId }: ResultTargetProps) => {
   }
 
   return (
-    <LockedFile sessionId={sessionId} password={password}>
+    <LockedFile password={password} gameDifficulty='hard'>
       <h2 className='result-title'>Zabezpečení Očistce</h2>
       <div className='nyx-buttons'>
         <button
@@ -72,7 +72,7 @@ const Epsilon10 = ({ sessionId }: ResultTargetProps) => {
         </button>
       </div>
       {showDetails === 'vyroba' && (
-        <LockedFile sessionId='vyroba' password='Slunce2025'>
+        <LockedFile password='Slunce2025'>
           <div className='text-block'>
             <div>
               <h3>Záznam č. 003 – Výroba Hroznů Hněvu</h3>
@@ -98,12 +98,12 @@ const Epsilon10 = ({ sessionId }: ResultTargetProps) => {
         </LockedFile>
       )}
       {showDetails === 'patient2' && (
-        <LockedFile sessionId='klinika' password='TovarnaHnevu'>
+        <LockedFile password='TovarnaHnevu'>
           <LockUnlockSVG />
         </LockedFile>
       )}
       {showDetails === 'chemicka' && (
-        <LockedFile sessionId='chemicka' password='Stabilizace'>
+        <LockedFile password='Stabilizace'>
           <div className='text-block'>
             <div>
               <h3>Záznam č. 002 – Stabilizace Látky</h3>
@@ -129,7 +129,7 @@ const Epsilon10 = ({ sessionId }: ResultTargetProps) => {
         </LockedFile>
       )}
       {showDetails === 'dolovani' && (
-        <LockedFile sessionId='dolovani' password='Svetice123'>
+        <LockedFile password='Svetice123'>
           <div className='text-block'>
             <div>
               <h3>Záznam č. 001 – Dolování Látky</h3>

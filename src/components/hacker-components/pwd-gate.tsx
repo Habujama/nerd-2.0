@@ -52,34 +52,38 @@ const PasswordGate = ({ sessionId, children }: PasswordGateProps) => {
   if (unlocked) return <div>{children}</div>;
 
   return (
-    <div className="pwd-gate-wrapper">
+    <div className='pwd-gate-wrapper'>
       {!unlocked && !showGame && <h3>Uzel {sessionId} je uzamčen</h3>}
       {showGame && !unlocked && <h3>Obnovení hesla uzlu {sessionId}:</h3>}
-      {!showGame && 
+      {!showGame && (
         <>
-      {gameWon && <p>Heslo obnoveno: <strong>{ parsedSession?.password}</strong></p>}
+          {gameWon && (
+            <p>
+              Heslo obnoveno: <strong>{parsedSession?.password}</strong>
+            </p>
+          )}
 
           <form onSubmit={handleSubmit}>
-          <label style={{ textAlign: 'left'}}>
+            <label style={{ textAlign: 'left' }}>
               Heslo:
-            <input
-              id="password"
-              name="password"
-              aria-label="password"
-              aria-describedby='node-password-error'
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onBlur={() => setError(false)}
-              placeholder="Zadej heslo..."
-              className={error ? 'input-error' : 'input-clear'}
-            />
+              <input
+                id='password'
+                name='password'
+                aria-label='password'
+                aria-describedby='node-password-error'
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onBlur={() => setError(false)}
+                placeholder='Zadej heslo...'
+                className={error ? 'input-error' : 'input-clear'}
+              />
             </label>
-            {error &&
+            {error && (
               <p id='password-error' role='alert' className='error'>
                 Nesprávné heslo
               </p>
-            }
-            <button type="submit" disabled={error}>
+            )}
+            <button type='submit' disabled={error}>
               Ověřit
             </button>
           </form>
@@ -87,16 +91,16 @@ const PasswordGate = ({ sessionId, children }: PasswordGateProps) => {
             Zapomněl jsem heslo
           </button>
         </>
-      }
+      )}
 
-      {showGame &&
+      {showGame && (
         <>
-          <MiniGame sessionId={sessionId} setGameWon={handleGameWon} />
+          <MiniGame setGameWon={handleGameWon} />
           <button onClick={handleNavigateBack} className='pwd-link-button'>
             Zpět
           </button>
         </>
-      }
+      )}
     </div>
   );
 }

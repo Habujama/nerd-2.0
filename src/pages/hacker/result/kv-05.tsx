@@ -8,11 +8,7 @@ import './loading-mind/extraction.css';
 import LockedFile from './locked-file/locked-file.tsx';
 import AudioPlayer from '../../../components/audio-player/audio-player.tsx';
 
-interface Kv05Props {
-  sessionId: string;
-}
-
-const Kv05 = ({ sessionId }: Kv05Props) => {
+const Kv05 = () => {
   const [loadingStatus, setExtractionStatus] = useState([
     false,
     false,
@@ -141,11 +137,7 @@ const Kv05 = ({ sessionId }: Kv05Props) => {
         </div>
       )}
       {showDetails === 'locked' && (
-        <LockedFile
-          sessionId={sessionId}
-          password='NovyDen'
-          isPwdRecovarable={false}
-        >
+        <LockedFile password='NovyDen' isPwdRecovarable={false}>
           <AudioPlayer audioFile={Belak2} />
         </LockedFile>
       )}
