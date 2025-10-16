@@ -16,6 +16,7 @@ import Epsilon10 from './epsilon-10';
 import Omicron9 from './omicron-9';
 import Zeta13 from './zeta-13';
 import Gama14 from './gama-14';
+import Workshop from './workshop';
 
 export type ResultTargetProps = { sessionId: string };
 
@@ -33,6 +34,7 @@ const RESULT_MAP: Record<string, React.FC<ResultTargetProps>> = {
   'omicron-09': Omicron9,
   'zeta-13': Zeta13,
   'gama-14': Gama14,
+  workshop: Workshop,
 };
 
 export default function Result() {
