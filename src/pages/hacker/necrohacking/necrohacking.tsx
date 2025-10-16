@@ -76,49 +76,49 @@ const Necrohacking = () => {
         }
       }, [loadingStatus]);
     return (
-        <Wrapper>
-            <Nav />
-            <div className='hacker-page'>
-                <h2 style={{marginTop: '3rem'}}>Necrohacking interface</h2>
-                <div>
-          {loadingStatus.filter(Boolean).length < 5 &&
-            !isExtraction &&
-            !loadingIntercepted && (
-              <ExtractionReady
-                setIsExtracting={setIsExtracting}
-                setExtractionStatus={setExtractionStatus}
-                setExtractionIntercepted={setExtractionIntercepted}
-              />
-            )}
-          {loadingStatus.filter(Boolean).length < 5 &&
-            isExtraction &&
-            !loadingIntercepted && (
-              <ExtractionInProgress
-                setIsExtracting={setIsExtracting}
-                setExtractionStatus={setExtractionStatus}
-                setExtractionIntercepted={setExtractionIntercepted}
-                loadingStatus={loadingStatus}
-              />
-            )}
-          {loadingStatus.filter(Boolean).length < 5 &&
-            !isExtraction &&
-            loadingIntercepted && (
-              <ExtractionIntercepted
-                setIsExtracting={setIsExtracting}
-                setExtractionStatus={setExtractionStatus}
-                setExtractionIntercepted={setExtractionIntercepted}
-              />
-            )}
-          {loadingStatus.filter(Boolean).length > 4 &&
-            !isExtraction &&
-            !loadingIntercepted && <ConnectionLoader />}
-                </div>
-                <button onClick={handleNavigateBack} className='back-button'>
-        ⬅
-      </button>
-            </div>
-    </Wrapper>
-)
+      <Wrapper>
+        <Nav />
+        <div className='hacker-page'>
+          <h2 style={{ marginTop: '3rem' }}>Necrohacking interface</h2>
+          <div>
+            {loadingStatus.filter(Boolean).length < 5 &&
+              !isExtraction &&
+              !loadingIntercepted && (
+                <ExtractionReady
+                  setIsExtracting={setIsExtracting}
+                  setExtractionStatus={setExtractionStatus}
+                  setExtractionIntercepted={setExtractionIntercepted}
+                />
+              )}
+            {loadingStatus.filter(Boolean).length < 5 &&
+              isExtraction &&
+              !loadingIntercepted && (
+                <ExtractionInProgress
+                  setIsExtracting={setIsExtracting}
+                  setExtractionStatus={setExtractionStatus}
+                  setExtractionIntercepted={setExtractionIntercepted}
+                  loadingStatus={loadingStatus}
+                />
+              )}
+            {loadingStatus.filter(Boolean).length < 5 &&
+              !isExtraction &&
+              loadingIntercepted && (
+                <ExtractionIntercepted
+                  setIsExtracting={setIsExtracting}
+                  setExtractionStatus={setExtractionStatus}
+                  setExtractionIntercepted={setExtractionIntercepted}
+                />
+              )}
+            {loadingStatus.filter(Boolean).length > 4 &&
+              !isExtraction &&
+              !loadingIntercepted && <ConnectionLoader />}
+          </div>
+          <button onClick={handleNavigateBack} className='back-button'>
+            ⬅
+          </button>
+        </div>
+      </Wrapper>
+    );
 }
 
 export default Necrohacking
