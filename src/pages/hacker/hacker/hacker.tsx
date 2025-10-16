@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../context/use-context.tsx';
 import type { CipherInfo, Session } from '../../../context/types.ts';
@@ -6,9 +7,8 @@ import Nav from '../../../components/nav/nav.tsx';
 import CipherInput from '../../../components/hacker-components/cipher-input.tsx';
 import SolvedCiphers from '../../../components/hacker-components/solved-ciphers/solved-ciphers.tsx';
 import { saveSession } from '../../../lib/hackSession';
-import './hacker.css';
-import { useMemo } from 'react';
 import getSolvedCiphersFromSessions from './get-solved-ciphers.tsx';
+import './hacker.css';
 
 export default function Hacker() {
   const { ciphersList } = useAuth();
@@ -49,7 +49,19 @@ export default function Hacker() {
       <Nav />
       <div className='medic-panel'>
         <div className='hacker-page'>
-          <CipherInput ciphersList={ciphersList} startSession={startSession} />
+          <div className='hacker-options'>
+            <button
+              onClick={() => navigate('/necrohacking')}
+              className='necrohacking-button'
+            >
+              Zahájit necrohacking 💀
+            </button>
+            <hr style={{ transform: 'translateRotate(90)' }} />
+            <CipherInput
+              ciphersList={ciphersList}
+              startSession={startSession}
+            />
+          </div>
           <SolvedCiphers solvedCiphers={solvedCiphers} />
         </div>
       </div>
